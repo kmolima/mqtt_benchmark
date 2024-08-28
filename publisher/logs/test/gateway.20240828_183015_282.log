@@ -1,0 +1,42 @@
+18:30:15[INFO]:Gateway Configuration: 
+Name: Virtual Data File Gateway /app/data 
+Sensorhubs: 1
+18:30:15[INFO]:Publisher: [Initialized] 
+MQTT Client Configuration: 
+NAME: Publisher 
+CLIENT_ID: publisher-1 
+BROKER_URL: host.docker.internal:1883 
+TOPIC: topic/structure//1:1 
+CONNECT CONFIG: tls=False, clean_start=True, keepalive=60, session_expiry_interval=3600 
+REATTEMPT CONFIG: attemtps=5, min-delay=2, max-delay=3600
+18:30:17[INFO]:Starting publishing 4 messages with 30 second intervals
+18:30:17[INFO]:Publisher: [Connecting]
+18:30:17[INFO]:Publisher: [Publish mid:1]
+18:30:17[INFO]:Publisher: [Connected]
+18:30:17[INFO]:Publisher: [on_publish mid:1], rc: No matching subscribers
+18:30:17[INFO]:Publisher: [Disconnected with rc: Normal disconnection]
+18:30:17[INFO]:Publisher: [Disconnected with Paho error: No error.]
+18:30:17[INFO]:Hub (VUWSN for historic data) - transmitted data
+18:30:47[INFO]:Publisher: [Connecting]
+18:30:47[INFO]:Publisher: [Publish mid:2]
+18:30:47[INFO]:Publisher: [Connected]
+18:30:47[INFO]:Publisher: [on_publish mid:2], rc: No matching subscribers
+18:30:47[INFO]:Publisher: [Disconnected with rc: Normal disconnection]
+18:30:47[INFO]:Publisher: [Disconnected with Paho error: No error.]
+18:30:47[INFO]:Hub (VUWSN for historic data) - transmitted data
+18:31:17[INFO]:Publisher: [Connecting]
+18:31:17[INFO]:Publisher: [Publish mid:3]
+18:31:17[INFO]:Publisher: [Connected]
+18:31:17[INFO]:Publisher: [on_publish mid:3], rc: No matching subscribers
+18:31:17[INFO]:Publisher: [Disconnected with rc: Normal disconnection]
+18:31:17[INFO]:Publisher: [Disconnected with Paho error: No error.]
+18:31:17[INFO]:Hub (VUWSN for historic data) - transmitted data
+18:31:47[INFO]:Publisher: [Connecting]
+18:31:47[INFO]:Publisher: [Publish mid:4]
+18:31:47[INFO]:Publisher: [Connected]
+18:31:47[INFO]:Publisher: [on_publish mid:4], rc: No matching subscribers
+18:31:47[INFO]:Publisher: [Disconnected with rc: Normal disconnection]
+18:31:47[INFO]:Publisher: [Disconnected with Paho error: No error.]
+18:31:47[INFO]:Hub (VUWSN for historic data) - transmitted data
+18:32:17[INFO]:Gateway finished transmitting data. Transmitted 4/4 messages
+18:32:17[INFO]:Publisher: [Stopping]

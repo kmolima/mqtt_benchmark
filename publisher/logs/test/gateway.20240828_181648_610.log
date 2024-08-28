@@ -1,0 +1,36 @@
+18:16:48[INFO]:Gateway Configuration: 
+Name: Virtual Data File Gateway /app/data 
+Sensorhubs: 1
+18:16:48[INFO]:Publisher: [Initialized] 
+MQTT Client Configuration: 
+NAME: Publisher 
+CLIENT_ID: publisher-1 
+BROKER_URL: host.docker.internal:1883 
+TOPIC: topic/structure//1:0 
+CONNECT CONFIG: tls=False, clean_start=True, keepalive=60, session_expiry_interval=3600 
+REATTEMPT CONFIG: attemtps=5, min-delay=2, max-delay=3600
+18:16:50[INFO]:Starting publishing 4 messages with 30 second intervals
+18:16:50[INFO]:Publisher: [Connecting]
+18:16:50[INFO]:Publisher: [Publish mid:1]
+18:16:50[INFO]:Publisher: [on_publish mid:1], rc: Success
+18:16:50[INFO]:Publisher: [Connected]
+18:16:50[INFO]:Publisher: [Disconnected with rc: Normal disconnection]
+18:16:50[INFO]:Publisher: [Disconnected with Paho error: No error.]
+18:16:50[INFO]:Hub (VUWSN for historic data) - transmitted data
+18:17:20[INFO]:Publisher: [Publish mid:2]
+18:17:20[INFO]:Publisher: Could not publish due to error: Message publish failed: The client is not currently connected.
+18:17:21[INFO]:Hub (VUWSN for historic data) - failed to transmit data
+18:17:51[INFO]:Publisher: [Connecting]
+18:17:51[INFO]:Publisher: [Publish mid:3]
+18:17:51[INFO]:Publisher: [on_publish mid:3], rc: Success
+18:17:51[INFO]:Publisher: [Disconnected with rc: Normal disconnection]
+18:17:51[INFO]:Publisher: [Disconnected with Paho error: No error.]
+18:17:51[INFO]:Hub (VUWSN for historic data) - transmitted data
+18:18:21[INFO]:Publisher: [Connecting]
+18:18:21[INFO]:Publisher: [Publish mid:4]
+18:18:21[INFO]:Publisher: [on_publish mid:4], rc: Success
+18:18:21[INFO]:Publisher: [Disconnected with rc: Normal disconnection]
+18:18:21[INFO]:Publisher: [Disconnected with Paho error: No error.]
+18:18:21[INFO]:Hub (VUWSN for historic data) - transmitted data
+18:18:51[INFO]:Gateway finished transmitting data. Transmitted 3/4 messages
+18:18:51[INFO]:Publisher: [Stopping]

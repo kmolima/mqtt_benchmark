@@ -1,0 +1,42 @@
+22:35:03[INFO]:Gateway Configuration: 
+Name: Virtual Data File Gateway /app/data 
+Sensorhubs: 1
+22:35:03[INFO]:Publisher: [Initialized] 
+MQTT Client Configuration: 
+NAME: Publisher 
+CLIENT_ID: publisher-1 
+BROKER_URL: host.docker.internal:1883 
+TOPIC: topic/structure/node1:2 
+CONNECT CONFIG: tls=False, clean_start=True, keepalive=60, session_expiry_interval=3600 
+REATTEMPT CONFIG: attemtps=5, min-delay=2, max-delay=3600
+22:35:05[INFO]:Starting publishing 4 messages with 30 second intervals
+22:35:05[INFO]:Publisher: [Connecting]
+22:35:05[INFO]:Publisher: [Publish mid:1]
+22:35:05[INFO]:Publisher: [Connected]
+22:35:05[INFO]:Publisher: [on_publish mid:1], rc: Success
+22:35:05[INFO]:Publisher: [Disconnected with rc: Normal disconnection]
+22:35:05[INFO]:Publisher: [Disconnected with Paho error: No error.]
+22:35:05[INFO]:Hub (VUWSN for historic data) - transmitted data
+22:35:35[INFO]:Publisher: [Connecting]
+22:35:35[INFO]:Publisher: [Publish mid:2]
+22:35:35[INFO]:Publisher: [Connected]
+22:35:35[INFO]:Publisher: [on_publish mid:2], rc: Success
+22:35:35[INFO]:Publisher: [Disconnected with rc: Normal disconnection]
+22:35:35[INFO]:Publisher: [Disconnected with Paho error: No error.]
+22:35:35[INFO]:Hub (VUWSN for historic data) - transmitted data
+22:36:05[INFO]:Publisher: [Connecting]
+22:36:05[INFO]:Publisher: [Publish mid:3]
+22:36:05[INFO]:Publisher: [Connected]
+22:36:05[INFO]:Publisher: [on_publish mid:3], rc: Success
+22:36:05[INFO]:Publisher: [Disconnected with rc: Normal disconnection]
+22:36:05[INFO]:Publisher: [Disconnected with Paho error: No error.]
+22:36:05[INFO]:Hub (VUWSN for historic data) - transmitted data
+22:36:35[INFO]:Publisher: [Connecting]
+22:36:35[INFO]:Publisher: [Publish mid:4]
+22:36:35[INFO]:Publisher: [Connected]
+22:36:35[INFO]:Publisher: [on_publish mid:4], rc: Success
+22:36:35[INFO]:Publisher: [Disconnected with rc: Normal disconnection]
+22:36:35[INFO]:Publisher: [Disconnected with Paho error: No error.]
+22:36:35[INFO]:Hub (VUWSN for historic data) - transmitted data
+22:37:05[INFO]:Gateway finished transmitting data. Transmitted 4/4 messages
+22:37:05[INFO]:Publisher: [Stopping]
