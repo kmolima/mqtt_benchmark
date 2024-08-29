@@ -45,6 +45,8 @@ def get_ports_for_broker(broker: str) -> dict:
     result = dict()
 
     result['1883'] = 1883
+    result['8080'] = 8080
+
     return result
 
 
@@ -112,6 +114,8 @@ def run_subscribers(client, n:int, np: int, qos:int, config:int, file_path:str, 
                 volumes=volumes,
                 entrypoint='python',
                 command=cmd,
+                mem_limit='4g',
+                cpuset_cpus='5-8',
                 detach=True  # Run in the background
             )
             containers.append(container)
@@ -167,6 +171,8 @@ def run_publishers(client, n:int, qos:int, file_path:str, log_path:str, topic_pr
                 entrypoint='python',
                 network_mode='bridge',
                 extra_hosts={'host.docker.internal':'host-gateway'},
+                mem_limit='1g',
+                cpuset_cpus='0-3',
                 command=cmd,
                 detach=True  # Run in the background
             )
@@ -236,8 +242,9 @@ if __name__ == "__main__":
 
                     try:
                         sut = client.containers.run(image=mqtt_broker, command='', publish_all_ports=True, volumes=mounts,
-                                                name=broker_name, network_mode='bridge', ports=ports,
+                                                name=broker_name, network_mode='bridge', ports=ports, mem_limit='12g',
                                                 environment=environment_variables_broker, detach=True, remove=True,
+                                                cpuset_cpus='10-19',
                                                 auto_remove=True)
                         print(f'SUT container MQTT Broker {broker_name} started with ID: {sut.short_id}')
 
