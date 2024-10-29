@@ -1,0 +1,12 @@
+INGESTION_BROKER: ingestion-hivemq-broker
+INGESTION_BROKER_PORT: 1883
+CORE_BROKER: core-hivemq-broker
+CORE_BROKER_PORT: 1884
+INGESTION_TOPIC: smartocean/austevoll/wsense
+CORE_TOPIC: smartocean/austevoll/wsense/raw
+QOS: 2
+
+INGESTION_BROKER_CLIENT_ID: wsensetransformer
+CORE_BROKER_CLIENT_ID: wsensetransformer
+
+LOG_FILE: logs/log-wsense-transformer-config1.log

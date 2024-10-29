@@ -1,0 +1,12 @@
+INGESTION_BROKER: localhost
+INGESTION_BROKER_PORT: 1883
+CORE_BROKER: localhost
+CORE_BROKER_PORT: 1884
+INGESTION_TOPIC: smartocean/austevoll/aadi/seaguardII_0001
+CORE_TOPIC: smartocean/austevoll/aadi/seaguardII_0001/raw
+QOS: ${QOS}
+
+INGESTION_BROKER_CLIENT_ID: aaditransformer1
+CORE_BROKER_CLIENT_ID: aaditransformer1
+
+LOG_FILE: logs/log-aadi-hub1-transformer-config2.log
