@@ -39,3 +39,8 @@ CMakeUserPresets.json
 publisher/logs/test/*.log
 subscriber/logs/test/*.log
 
+# Generated credential files to deploy
+scripts/*.xml
+
+/subscriber/logs/test/
+/publisher/logs/test/

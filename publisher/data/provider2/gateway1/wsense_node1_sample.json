@@ -1,0 +1,62 @@
+{
+  "definitions": [
+    {
+      "id": "79",
+      "name": "battery_voltage_mv",
+      "unit": "mV"
+    }
+  ],
+  "nodes": [
+    {
+      "node": {
+        "id": "sfi_smart_ocean;demo;d1;1",
+        "treeId": "1",
+        "type": "NODE",
+        "name": "Node 1",
+        "coordinates": {
+          "latitude": 60.090717,
+          "longitude": 5.263733
+        },
+        "children": [
+          {
+            "id": "sfi_smart_ocean;demo;d1;1;AANDERAA_CONDUCTIVITY",
+            "treeId": "AANDERAA_CONDUCTIVITY",
+            "type": "PROBE",
+            "name": "Aanderaa Conductivity"
+          },
+          {
+            "id": "sfi_smart_ocean;demo;d1;1;DEPTH",
+            "treeId": "DEPTH",
+            "type": "PROBE",
+            "name": "W-Node Pressure"
+          },
+          {
+            "id": "sfi_smart_ocean;demo;d1;1;BATTERY_MODULE",
+            "treeId": "BATTERY_MODULE",
+            "type": "PROBE",
+            "name": "Battery module"
+          },
+          {
+            "id": "sfi_smart_ocean;demo;d1;1;TEMPERATURE",
+            "treeId": "TEMPERATURE",
+            "type": "PROBE",
+            "name": "W-Node Temperature"
+          }
+        ],
+        "data": [
+          {
+            "battery_voltage_mv": {
+              "data": [
+                {
+                  "timestamp": "2024-04-03T08:00:31.355000+00:00",
+                  "value": 3626.0,
+                  "probe_type": "BATTERY_MODULE"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
