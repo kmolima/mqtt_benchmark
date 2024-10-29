@@ -1,0 +1,48 @@
+# Comments are provided throughout this file to help you get started.
+# If you need more help, visit the Docker compose reference guide at
+# https://docs.docker.com/compose/compose-file/
+
+# Here the instructions define your application as a service called "app".
+# This service is built from the Dockerfile in the current directory.
+# You can add other services your application may depend on here, such as a
+# database or a cache. For examples, see the Awesome Compose repository:
+# https://github.com/docker/awesome-compose
+services:
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    # If your application exposes a port, uncomment the following lines and change
+    # the port numbers as needed. The first number is the host port and the second
+    # is the port inside the container.
+    ports:
+      - 9090:9090
+    volumes:
+      - ./monitoring/configs/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./monitoring/prometheus_data:/prometheus
+      # - prometheus-test:/prometheus
+    healthcheck:
+        test: "wget --no-verbose --tries=1 --spider localhost:9090 || exit 1"
+        start_period: 5s
+        interval: 30s
+        timeout: 10s
+    #network_mode: host
+    # Add access to host machine
+#    extra_hosts:
+#      - host.docker.internal:host-gateway
+#    networks:
+#      - monitoring
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    env_file:
+      - .env
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_USER}
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
+    depends_on:
+      - "prometheus"
+    ports:
+      - 3000:3000
+    volumes:
+      - ./monitoring/configs/provisioning/:/etc/grafana/provisioning/
+

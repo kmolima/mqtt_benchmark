@@ -1,0 +1,28 @@
+services:
+    # MQTT Ingestion Broker for provider 1
+    hivemq:
+        image: hivemq/hivemq-ce
+        container_name: ingestion-hivemq-broker1
+        depends_on:
+            - opentelemetry-collector
+        environment:
+            - HIVEMQ_LOG_LEVEL=DEBUG
+        ports:
+            - 1883:1883
+            - 8888:9399
+            - 8080:8080 # used for healthcheck
+        volumes:
+            - ./monitoring/hivemq-prometheus-extension:/opt/hivemq/extensions/hivemq-prometheus-extension
+            - ./monitoring/hivemq-file-rbac-extension:/opt/hivemq/extensions/hivemq-file-rbac-extension
+            - ./scripts/credentials_ingestion.xml:/opt/hivemq/extensions/hivemq-file-rbac-extension/conf/credentials.xml
+        ulimits:
+            nofile:
+                soft: 500000
+                hard: 500000
+        healthcheck:
+            test: "curl -f http://localhost:8080 || exit 1"
+            start_period: 5s
+            interval: 30s
+            timeout: 10s
+            retries: 5
+

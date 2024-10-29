@@ -1,0 +1,90 @@
+# Deployment architecture under test (AUT) 1: one transformer per provider stream
+services:
+    opentelemetry-collector-core:
+        ports:
+            - 4318:4317
+            - 8887:8887
+            - 8886:8886
+        volumes:
+            - ./monitoring/configs/otel-collector-config.yml:/etc/otel-collector-config.yaml
+        environment:
+            - OTEL_RESOURCE_ATTRIBUTES="service.name=core,service.namespace=aut"
+            - BROKER=core-hivemq-broker
+        image: otel/opentelemetry-collector:latest
+        container_name: otel-collector
+    # MQTT Core Broker
+    hivemq-core:
+        image: hivemq/hivemq-ce
+        #network_mode: host
+        container_name: core-hivemq-broker
+        depends_on:
+            - "opentelemetry-collector-core"
+        environment:
+            - HIVEMQ_LOG_LEVEL=DEBUG
+        ports:
+            - 1884:1883
+            - 9397:9399
+            - 8082:8080 # used for healthcheck
+        volumes:
+            - ./monitoring/hivemq-prometheus-extension:/opt/hivemq/extensions/hivemq-prometheus-extension
+            - ./monitoring/hivemq-file-rbac-extension:/opt/hivemq/extensions/hivemq-file-rbac-extension
+            - ./scripts/credentials_core.xml:/opt/hivemq/extensions/hivemq-file-rbac-extension/conf/credentials.xml
+        ulimits:
+            nofile:
+                soft: 500000
+                hard: 500000
+        healthcheck:
+            test: "curl -f http://localhost:8080 || exit 1"
+            start_period: 5s
+            interval: 30s
+            timeout: 10s
+            retries: 5
+    # Data Transformation Services
+    # Provider 1 Transformer
+    transformer1:
+        image: data_transformer:latest
+        container_name: data_transformer1
+        environment:
+          - TRANSFORMER_FILE=deploy_docker_aadinodetransformer.sh
+          - TRANSFORMER_CONFIGFILE=./transformer/configs/config-provider1.yml
+            # Open Telemetry configuration
+          - OTEL_SERVICE_NAME="monitoring-transformer1"
+          - OTEL_RESOURCE_ATTRIBUTES="env=dev,layer=core"
+          - OTEL_METRICS_EXPORTER="otlp"
+          - OTEL_TRACES_EXPORTER="none"
+          - OTEL_LOGS_EXPORTER="none"
+          - OTEL_EXPORTER_OTLP_METRICS_ENDPOINT="http://otel-collector:4317"
+          - OTEL_EXPORTER_OTLP_METRICS_PROTOCOL="grpc"
+          - OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED="true"
+        volumes:
+          - ./transformer/logs:/app/transformer/logs
+          - ./transformer/configs/config-provider1.yml:/transformer/config-provider1.yml
+        entrypoint: ["/bin/bash"]
+        command: ["/transformer/deploy_docker_aadinodetransformer.sh", "/transformer/config-provider1.yml"]
+        depends_on:
+            hivemq-core:
+                condition: service_healthy
+    # Provider 2 Transformer
+    transformer2:
+        image: data_transformer:latest
+        container_name: data_transformer2
+        environment:
+           - TRANSFORMER_FILE=deploy_docker_wsensenodetransformer.sh
+           - TRANSFORMER_CONFIGFILE=./transformer/configs/config-provider2.yml
+            # Open Telemetry configuration
+           - OTEL_SERVICE_NAME="monitoring-transformer2"
+           - OTEL_RESOURCE_ATTRIBUTES="env=dev,layer=core"
+           - OTEL_METRICS_EXPORTER="otlp"
+           - OTEL_TRACES_EXPORTER="none"
+           - OTEL_LOGS_EXPORTER="none"
+           - OTEL_EXPORTER_OTLP_METRICS_ENDPOINT="http://otel-collector:4317"
+           - OTEL_EXPORTER_OTLP_METRICS_PROTOCOL="grpc"
+           - OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED="true"
+        volumes:
+           - ./transformer/logs:/app/transformer/logs
+           - ./transformer/configs/config-provider2.yml:/transformer/config-provider2.yml
+        entrypoint: ["/bin/bash"]
+        command: ["/transformer/deploy_docker_wsensenodetransformer.sh", "/transformer/config-provider2.yml"]
+        depends_on:
+            hivemq-core:
+                condition: service_healthy
