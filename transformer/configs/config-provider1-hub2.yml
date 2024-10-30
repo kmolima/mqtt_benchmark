@@ -1,9 +1,11 @@
-INGESTION_BROKER: ingestion-hivemq-broker1
+INGESTION_BROKER: SmartOceanBenchmark
 INGESTION_BROKER_PORT: 1883
+INGESTION_TLS: False
+CORE_TLS: False
 CORE_BROKER: core-hivemq-broker
 CORE_BROKER_PORT: 1885
 INGESTION_TOPIC: site1/provider1/gateway2/hub1
-CORE_TOPIC: smartocean/austevoll/aadi/seaguardII_0002/raw
+CORE_TOPIC: site1/provider1/gateway2/hub1
 QOS: ${QOS}
 
 INGESTION_BROKER_CLIENT_ID: transformer2

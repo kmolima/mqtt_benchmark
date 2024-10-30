@@ -1,5 +1,7 @@
-INGESTION_BROKER: ingestion-hivemq-broker1
+INGESTION_BROKER: SmartOceanBenchmark
 INGESTION_BROKER_PORT: 1883
+INGESTION_TLS: False
+CORE_TLS: False
 CORE_BROKER: core-hivemq-broker
 CORE_BROKER_PORT: 1885
 INGESTION_TOPIC: site1/provider1/gateway1/hub1
