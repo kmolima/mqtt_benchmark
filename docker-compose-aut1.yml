@@ -44,6 +44,8 @@ services:
     transformer1:
         image: data_transformer:latest
         container_name: data_transformer1
+        env_file:
+          - .env
         environment:
           - INGESTION_USERNAME=transformer1
           - INGESTION_PASSWORD=${PASSWORD1}
@@ -69,6 +71,8 @@ services:
     transformer2:
         image: data_transformer:latest
         container_name: data_transformer2
+        env_file:
+          - .env
         environment:
            - INGESTION_USERNAME=transformer2
            - INGESTION_PASSWORD=${PASSWORD1}
