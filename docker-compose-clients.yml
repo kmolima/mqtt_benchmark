@@ -1,0 +1,48 @@
+services:
+    subscriber:
+        container_name: subscriber
+        environment:
+            - QOS=0
+            - TOPIC=site1/#
+        volumes:
+            - ./subscriber/configs/subscriber.yml:/app/config.yml
+            - ${CERT}:${CERT}
+            - ./subscriber/logs/aut1/qos0:/app/logs
+            - PASSWORD2=${PASSWORD2}
+        entrypoint: ["python3"]
+        image: mqtt_client
+        command: ["subscriber.py", "--configfile", "/app/config.yml", "--logfile", "logs/subscriber.log"]
+        healthcheck:
+            start_period: 30s
+    provider1:
+        container_name: provider1
+        environment:
+            - QOS=${QOS}
+            - TOPIC=site1/
+            - PASSWORD1=${PASSWORD1}
+        volumes:
+            - publisher/configs/data_provider1.yml:/app/config.yml
+            - ./subscriber/logs/aut1/qos0:/app/logs
+            - ${CERT}:${CERT}
+            - ./publisher/data/provider1:/app/data
+        image: mqtt_client
+        command: ["--configfile", "/app/config.yml"]
+        depends_on:
+            subscriber:
+                condition: service_healthy
+    provider2:
+        container_name: provider2
+        environment:
+            - QOS=${QOS}
+            - TOPIC=site1/
+            - PASSWORD1=${PASSWORD1}
+        volumes:
+            - ./publisher/configs/data_provider2.yml:/app/config.yml
+            - ./subscriber/logs/aut1/qos0:/app/logs
+            - ${CERT}:${CERT}
+            - ./publisher/data/provider2:/app/data
+        image: mqtt_client
+        command: ["--configfile", "/app/config.yml"]
+        depends_on:
+            subscriber:
+                condition: service_healthy
