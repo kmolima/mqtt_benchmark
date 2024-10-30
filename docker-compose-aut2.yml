@@ -43,8 +43,10 @@ services:
         image: data_transformer:latest
         container_name: data_transformer11
         environment:
-          - TRANSFORMER_FILE=deploy_docker_aadinodetransformer.sh
-          - TRANSFORMER_CONFIGFILE=./transformer/configs/config-provider1.yml
+          - INGESTION_USERNAME=transformer1
+          - INGESTION_PASSWORD=${PASSWORD1}
+          - CORE_PASSWORD=${PASSWORD2}
+          - CORE_USERNAME=transformer1
            # Open Telemetry configuration
           - OTEL_SERVICE_NAME="monitoring-transformer11"
           - OTEL_RESOURCE_ATTRIBUTES="env=dev,layer=core"
@@ -55,10 +57,9 @@ services:
           - OTEL_EXPORTER_OTLP_METRICS_PROTOCOL="grpc"
           - OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED="true"
         volumes:
-          - ./transformer/logs:/app/transformer/logs
-          - ./transformer/configs/config-provider1.yml:/transformer/config-provider1.yml
-        entrypoint: ["/bin/bash"]
-        command: ["/transformer/deploy_docker_aadinodetransformer.sh", "/transformer/config-provider1.yml"]
+          - ./transformer/logs:/app/logs
+          - ./transformer/configs/config-provider1-hub1.yml:/app/config.yml
+        command: [ "aadinode_transformer.py", "--configfile","/app/config.yml" ]
         depends_on:
             hivemq-core:
                 condition: service_healthy
@@ -66,8 +67,10 @@ services:
         image: data_transformer:latest
         container_name: data_transformer12
         environment:
-            - TRANSFORMER_FILE=deploy_docker_aadinodetransformer.sh
-            - TRANSFORMER_CONFIGFILE=./transformer/configs/config-provider1.yml
+            - INGESTION_USERNAME=transformer2
+            - INGESTION_PASSWORD=${PASSWORD1}
+            - CORE_PASSWORD=${PASSWORD2}
+            - CORE_USERNAME=transformer2
             # Open Telemetry configuration
             - OTEL_SERVICE_NAME="monitoring-transformer12"
             - OTEL_RESOURCE_ATTRIBUTES="env=dev,layer=core"
@@ -78,10 +81,9 @@ services:
             - OTEL_EXPORTER_OTLP_METRICS_PROTOCOL="grpc"
             - OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED="true"
         volumes:
-            - ./transformer/logs:/app/transformer/logs
-            - ./transformer/configs/config-provider1.yml:/transformer/config-provider1.yml
-        entrypoint: [ "/bin/bash" ]
-        command: [ "/transformer/deploy_docker_aadinodetransformer.sh", "/transformer/config-provider1.yml" ]
+            - ./transformer/logs:/app/logs
+            - ./transformer/configs/config-provider1-hub2.yml:/app/config.yml
+        command: ["aadinode_transformer.py", "--configfile","/app/config.yml"]
         depends_on:
             hivemq-core:
                 condition: service_healthy
@@ -90,8 +92,10 @@ services:
         image: data_transformer:latest
         container_name: data_transformer21
         environment:
-           - TRANSFORMER_FILE=deploy_docker_wsensenodetransformer.sh
-           - TRANSFORMER_CONFIGFILE=./transformer/configs/config-provider2.yml
+           - INGESTION_USERNAME=transformer3
+           - INGESTION_PASSWORD=${PASSWORD1}
+           - CORE_PASSWORD=${PASSWORD2}
+           - CORE_USERNAME=transformer3
             # Open Telemetry configuration
            - OTEL_SERVICE_NAME="monitoring-transformer21"
            - OTEL_RESOURCE_ATTRIBUTES="env=dev,layer=core"
@@ -102,10 +106,9 @@ services:
            - OTEL_EXPORTER_OTLP_METRICS_PROTOCOL="grpc"
            - OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED="true"
         volumes:
-           - ./transformer/logs:/app/transformer/logs
-           - ./transformer/configs/config-provider2.yml:/transformer/config-provider2.yml
-        entrypoint: ["/bin/bash"]
-        command: ["/transformer/deploy_docker_wsensenodetransformer.sh", "/transformer/config-provider2.yml"]
+           - ./transformer/logs:/app/logs
+           - ./transformer/configs/config-provider2-hub1.yml:/app/config.yml
+        command: [ "/app/wsense_transformer.py", "--configfile","/app/config.yml" ]
         depends_on:
             hivemq-core:
                 condition: service_healthy
@@ -113,8 +116,10 @@ services:
         image: data_transformer:latest
         container_name: data_transformer22
         environment:
-            - TRANSFORMER_FILE=deploy_docker_wsensenodetransformer.sh
-            - TRANSFORMER_CONFIGFILE=./transformer/configs/config-provider2.yml
+            - INGESTION_USERNAME=transformer4
+            - INGESTION_PASSWORD=${PASSWORD1}
+            - CORE_USERNAME=transformer4
+            - CORE_PASSWORD=${PASSWORD2}
             # Open Telemetry configuration
             - OTEL_SERVICE_NAME="monitoring-transformer22"
             - OTEL_RESOURCE_ATTRIBUTES="env=dev,layer=core"
@@ -125,10 +130,9 @@ services:
             - OTEL_EXPORTER_OTLP_METRICS_PROTOCOL="grpc"
             - OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED="true"
         volumes:
-            - ./transformer/logs:/app/transformer/logs
-            - ./transformer/configs/config-provider2.yml:/transformer/config-provider2.yml
-        entrypoint: [ "/bin/bash" ]
-        command: [ "/transformer/deploy_docker_wsensenodetransformer.sh", "/transformer/config-provider2.yml" ]
+            - ./transformer/logs/:/app/logs
+            - ./transformer/configs/config-provider2-hub2.yml:/app/config.yml
+        command: [ "/app/wsense_transformer.py", "--configfile","/app/config.yml" ]
         depends_on:
             hivemq-core:
                 condition: service_healthy

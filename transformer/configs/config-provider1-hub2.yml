@@ -1,12 +1,12 @@
-INGESTION_BROKER: localhost
+INGESTION_BROKER: ingestion-hivemq-broker1
 INGESTION_BROKER_PORT: 1883
-CORE_BROKER: localhost
-CORE_BROKER_PORT: 1884
-INGESTION_TOPIC: smartocean/austevoll/aadi/seaguardII_0002
+CORE_BROKER: core-hivemq-broker
+CORE_BROKER_PORT: 1885
+INGESTION_TOPIC: site1/provider1/gateway2/hub1
 CORE_TOPIC: smartocean/austevoll/aadi/seaguardII_0002/raw
 QOS: ${QOS}
 
-INGESTION_BROKER_CLIENT_ID: aaditransformer2
-CORE_BROKER_CLIENT_ID: aaditransformer2
+INGESTION_BROKER_CLIENT_ID: transformer2
+CORE_BROKER_CLIENT_ID: transformer2
 
-LOG_FILE: logs/log-aadi-hub2-transformer-config2.log
+LOG_FILE: logs/log-transformer-provider1-gateway2-hub1.log
