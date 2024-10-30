@@ -3,8 +3,6 @@ services:
     hivemq:
         image: hivemq/hivemq-ce
         container_name: ingestion-hivemq-broker1
-        depends_on:
-            - opentelemetry-collector
         environment:
             - HIVEMQ_LOG_LEVEL=DEBUG
         ports:

@@ -1,6 +1,8 @@
 services:
     subscriber:
         container_name: subscriber
+        env_file:
+            - .env
         environment:
             - QOS=0
             - TOPIC=site1/#
@@ -16,6 +18,8 @@ services:
             start_period: 30s
     provider1:
         container_name: provider1
+        env_file:
+            - .env
         environment:
             - QOS=${QOS}
             - TOPIC=site1/
@@ -32,6 +36,8 @@ services:
                 condition: service_healthy
     provider2:
         container_name: provider2
+        env_file:
+            - .env
         environment:
             - QOS=${QOS}
             - TOPIC=site1/
