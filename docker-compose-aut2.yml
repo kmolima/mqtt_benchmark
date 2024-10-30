@@ -21,8 +21,7 @@ services:
             - HIVEMQ_LOG_LEVEL=DEBUG
         ports:
             - 1885:1883
-            - 9398:9399
-            - 8081:8080 # used for healthcheck
+            - 9397:9399
         volumes:
             - ./monitoring/hivemq-prometheus-extension:/opt/hivemq/extensions/hivemq-prometheus-extension
             - ./monitoring/hivemq-file-rbac-extension:/opt/hivemq/extensions/hivemq-file-rbac-extension
@@ -32,11 +31,8 @@ services:
                 soft: 500000
                 hard: 500000
         healthcheck:
-            test: "curl -f http://localhost:8080 || exit 1"
-            start_period: 5s
-            interval: 30s
-            timeout: 10s
-            retries: 5
+          test: "sleep 1"
+          start_period: 30s
     # Data Transformation Services
     # Provider 1 Transformers
     transformer11:

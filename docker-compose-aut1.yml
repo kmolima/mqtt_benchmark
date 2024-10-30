@@ -24,7 +24,6 @@ services:
         ports:
             - 1885:1883
             - 9397:9399
-            - 8082:8080 # used for healthcheck
         volumes:
             - ./monitoring/hivemq-prometheus-extension:/opt/hivemq/extensions/hivemq-prometheus-extension
             - ./monitoring/hivemq-file-rbac-extension:/opt/hivemq/extensions/hivemq-file-rbac-extension

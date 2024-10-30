@@ -8,26 +8,26 @@ scrape_configs:  # use host.docker.internal when isolating docker networks
     scrape_interval: 15s
     metrics_path: '/metrics'
     static_configs:
-      - targets: [ 'ingestion-hivemq-broker1:8888' ]
+      - targets: [ 'SmartOceanBenchmark:8888' ]
 
   - job_name: 'ingestion-service2' # HiveMQ Ingestion Broker for provider 2
     # Override the global default and scrape targets from this job every 5 seconds.
     scrape_interval: 15s
     metrics_path: '/metrics'
     static_configs:
-      - targets: [ 'ingestion-hivemq-broker2:8889' ]
+      - targets: [ 'SmartOceanBenchmark:8889' ]
 
   - job_name: 'core-service' # HiveMQ + transformers
     # Override the global default and scrape targets from this job every 5 seconds.
     scrape_interval: 15s
     metrics_path: '/metrics'
     static_configs:
-      - targets: [ 'otel-collector:8887' ]
+      - targets: [ 'SmartOceanBenchmark:8887' ]
 
   - job_name: 'core-collector' # OpenTelemetry Collector
     # Override the global default and scrape targets from this job every 5 seconds.
     scrape_interval: 15s
     metrics_path: '/metrics'
     static_configs:
-      - targets: [ 'otel-collector:8886' ]
+      - targets: [ 'SmartOceanBenchmark:8886' ]
 
