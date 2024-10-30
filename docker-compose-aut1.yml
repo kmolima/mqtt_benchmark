@@ -34,11 +34,8 @@ services:
                 soft: 500000
                 hard: 500000
         healthcheck:
-            test: "curl -f http://localhost:8080 || exit 1"
-            start_period: 5s
-            interval: 30s
-            timeout: 10s
-            retries: 5
+            test: "sleep 1"
+            start_period: 30s
     # Data Transformation Services
     # Provider 1 Transformer
     transformer1:

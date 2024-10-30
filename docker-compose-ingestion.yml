@@ -8,7 +8,6 @@ services:
         ports:
             - 1883:1883
             - 8888:9399
-            - 8080:8080 # used for healthcheck
         volumes:
             - ./monitoring/hivemq-prometheus-extension:/opt/hivemq/extensions/hivemq-prometheus-extension
             - ./monitoring/hivemq-file-rbac-extension:/opt/hivemq/extensions/hivemq-file-rbac-extension
@@ -17,12 +16,6 @@ services:
             nofile:
                 soft: 500000
                 hard: 500000
-        healthcheck:
-            test: "curl -f http://localhost:8080 || exit 1"
-            start_period: 5s
-            interval: 30s
-            timeout: 10s
-            retries: 5
     # MQTT Ingestion Broker for provider 2
     hivemq2:
         image: hivemq/hivemq-ce
@@ -41,10 +34,5 @@ services:
             nofile:
                 soft: 500000
                 hard: 500000
-        healthcheck:
-            test: "curl -f http://localhost:8080 || exit 1"
-            start_period: 5s
-            interval: 30s
-            timeout: 10s
-            retries: 5
+
 

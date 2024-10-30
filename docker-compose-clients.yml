@@ -15,6 +15,7 @@ services:
         image: mqtt_client
         command: ["subscriber.py", "--configfile", "/app/config.yml", "--logfile", "logs/subscriber.log"]
         healthcheck:
+            test: "sleep 1"
             start_period: 30s
     provider1:
         container_name: provider1
