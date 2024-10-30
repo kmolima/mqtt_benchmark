@@ -35,7 +35,7 @@ echo "Running clients for QOS: $1, log sub path $2 and saving docker stats in $3
 
 sh record_stats.sh $3 > /dev/null 2>&1 &
 
-docker compose -f docker-compose-clients up &
+docker compose -f docker-compose-clients.yml up &
 
 
 
