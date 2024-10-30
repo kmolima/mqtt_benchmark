@@ -22,7 +22,7 @@ services:
         environment:
             - HIVEMQ_LOG_LEVEL=DEBUG
         ports:
-            - 1884:1883
+            - 1885:1883
             - 9397:9399
             - 8082:8080 # used for healthcheck
         volumes:
