@@ -4,7 +4,7 @@ INGESTION_TLS: False
 CORE_TLS: False
 CORE_BROKER: core-hivemq-broker
 CORE_BROKER_PORT: 1885
-INGESTION_TOPIC: site1/provider1
+INGESTION_TOPIC: site1/provider1/#
 CORE_TOPIC: site1/provider1
 QOS: ${QOS}
 
