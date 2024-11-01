@@ -28,7 +28,6 @@ def stop_docker_compose(compose_file):
         print(e.output)
 
 
-
 def main():
 
     parser = argparse.ArgumentParser()
@@ -41,6 +40,8 @@ def main():
 
     # Verify input benchmark parameters
     assert (numexecs >= 1)
+
+    print(f"Running {numexecs} repetitions. . .")
 
     # clients docker compose file
     load_docker_compose = "docker-compose-clients.yml"
@@ -66,4 +67,8 @@ def main():
             stop_docker_compose(load_docker_compose)
             print(f'Error executing experiment containers: {e}')
         finally:
-            print(f'Finished execution for parameters')
+            print(f'Finished execution {exec}')
+
+
+if __name__ == "__main__":
+    main()
