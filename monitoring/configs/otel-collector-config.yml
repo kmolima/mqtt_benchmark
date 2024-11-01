@@ -35,7 +35,7 @@ exporters:
     path: ./telemetry.json
   # Data sources: metrics
   prometheus:
-    endpoint: 0.0.0.0:8887
+    endpoint: SmartOceanBenchmark:8887
     namespace:
 
 processors:
@@ -43,7 +43,7 @@ processors:
 
 extensions:
   health_check:
-    endpoint: localhost:13133
+    endpoint: SmartOceanBenchmark:1313
   # zpages:
 
 service:
@@ -59,7 +59,7 @@ service:
 #      processors: [ batch ]
   telemetry:
     metrics:
-      address: 0.0.0.0:8886
+      address: SmartOceanBenchmark:8886
     logs:
       level: "info"
 

@@ -8,7 +8,7 @@ services:
         volumes:
             - ./monitoring/configs/otel-collector-config.yml:/etc/otel-collector-config.yaml
         environment:
-            - OTEL_RESOURCE_ATTRIBUTES="service.name=core,service.namespace=aut"
+            - OTEL_RESOURCE_ATTRIBUTES=service.name=core,service.namespace=aut
             - BROKER=core-hivemq-broker
         image: otel/opentelemetry-collector:latest
         container_name: otel-collector
@@ -48,14 +48,13 @@ services:
           - CORE_USERNAME=transformer1
           - CORE_PASSWORD=${PASSWORD2}
             # Open Telemetry configuration
-          - OTEL_SERVICE_NAME="monitoring-transformer1"
-          - OTEL_RESOURCE_ATTRIBUTES="env=dev,layer=core"
-          - OTEL_METRICS_EXPORTER="otlp"
-          - OTEL_TRACES_EXPORTER="none"
-          - OTEL_LOGS_EXPORTER="none"
-          - OTEL_EXPORTER_OTLP_METRICS_ENDPOINT="http://otel-collector:4317"
-          - OTEL_EXPORTER_OTLP_METRICS_PROTOCOL="grpc"
-          - OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED="true"
+          - OTEL_SERVICE_NAME=transformer1
+          - OTEL_METRICS_EXPORTER=otlp
+          - OTEL_TRACES_EXPORTER=none
+          - OTEL_LOGS_EXPORTER=none
+          - OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=http://SmartOceanBenchmark:4317
+          - OTEL_EXPORTER_OTLP_METRICS_PROTOCOL=grpc
+          - OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED=true
         volumes:
           - ./transformer/logs:/app/transformer/logs
           - ./transformer/configs/config-provider1.yml:/app/transformer/config.yml
@@ -75,14 +74,13 @@ services:
            - CORE_USERNAME=transformer2
            - CORE_PASSWORD=${PASSWORD2}
             # Open Telemetry configuration
-           - OTEL_SERVICE_NAME="monitoring-transformer2"
-           - OTEL_RESOURCE_ATTRIBUTES="env=dev,layer=core"
-           - OTEL_METRICS_EXPORTER="otlp"
-           - OTEL_TRACES_EXPORTER="none"
-           - OTEL_LOGS_EXPORTER="none"
-           - OTEL_EXPORTER_OTLP_METRICS_ENDPOINT="http://otel-collector:4317"
-           - OTEL_EXPORTER_OTLP_METRICS_PROTOCOL="grpc"
-           - OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED="true"
+           - OTEL_SERVICE_NAME=transformer2
+           - OTEL_METRICS_EXPORTER=otlp
+           - OTEL_TRACES_EXPORTER=none
+           - OTEL_LOGS_EXPORTER=none
+           - OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=http://SmartOceanBenchmark:4317
+           - OTEL_EXPORTER_OTLP_METRICS_PROTOCOL=grpc
+           - OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED=true
         volumes:
           - ./transformer/logs:/app/transformer/logs
           - ./transformer/configs/config-provider2.yml:/app/transformer/config.yml
