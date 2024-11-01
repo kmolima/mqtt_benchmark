@@ -56,7 +56,7 @@ services:
           - OTEL_EXPORTER_OTLP_METRICS_PROTOCOL=grpc
           - OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED=true
         volumes:
-          - ./transformer/logs:/app/transformer/logs
+          - ./transformer/logs/${LOG_PATH}:/app/transformer/logs
           - ./transformer/configs/config-provider1.yml:/app/transformer/config.yml
         command: [ "aadinode_transformer.py", "--configfile","/app/transformer/config.yml" ]
         depends_on:
@@ -82,7 +82,7 @@ services:
            - OTEL_EXPORTER_OTLP_METRICS_PROTOCOL=grpc
            - OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED=true
         volumes:
-          - ./transformer/logs:/app/transformer/logs
+          - ./transformer/logs/${LOG_PATH}:/app/transformer/logs
           - ./transformer/configs/config-provider2.yml:/app/transformer/config.yml
         command: [ "wsense_transformer.py", "--configfile","/app/transformer/config.yml" ]
         depends_on:
