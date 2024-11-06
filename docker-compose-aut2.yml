@@ -124,7 +124,7 @@ services:
             - INGESTION_PASSWORD=${PASSWORD1}
             - CORE_USERNAME=transformer4
             - CORE_PASSWORD=${PASSWORD2}
-            - ${CERT}=${CERT}
+            - CERT=${CERT}
             # Open Telemetry configuration
             - OTEL_SERVICE_NAME=transformer4
             - OTEL_METRICS_EXPORTER=otlp
@@ -140,4 +140,4 @@ services:
         depends_on:
             hivemq-core:
                 condition: service_healthy
-                
+
