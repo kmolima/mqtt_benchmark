@@ -1,6 +1,6 @@
 # Deployment architecture under test (AUT) 2: one transformer per sensor hub stream
 services:
-    opentelemetry-collector-core:
+    otel-collector:
         ports:
             - 4318:4317
             - 8887:8887
@@ -16,7 +16,7 @@ services:
         image: hivemq/hivemq-ce
         container_name: core-hivemq-broker
         depends_on:
-            - "opentelemetry-collector-core"
+            - "otel-collector"
         environment:
             - HIVEMQ_LOG_LEVEL=DEBUG
         ports:
@@ -45,12 +45,13 @@ services:
           - INGESTION_PASSWORD=${PASSWORD1}
           - CORE_PASSWORD=${PASSWORD2}
           - CORE_USERNAME=transformer1
+          - ${CERT}=${CERT}
            # Open Telemetry configuration
           - OTEL_SERVICE_NAME=transformer1
           - OTEL_METRICS_EXPORTER=otlp
           - OTEL_TRACES_EXPORTER=none
           - OTEL_LOGS_EXPORTER=none
-          - OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=http://SmartOceanBenchmark:4317
+          - OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=otel-collector:4317
           - OTEL_EXPORTER_OTLP_METRICS_PROTOCOL=grpc
           - OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED=true
         volumes:
@@ -70,12 +71,13 @@ services:
             - INGESTION_PASSWORD=${PASSWORD1}
             - CORE_PASSWORD=${PASSWORD2}
             - CORE_USERNAME=transformer2
+            - ${CERT}=${CERT}
             # Open Telemetry configuration
             - OTEL_SERVICE_NAME=transformer2
             - OTEL_METRICS_EXPORTER=otlp
             - OTEL_TRACES_EXPORTER=none
             - OTEL_LOGS_EXPORTER=none
-            - OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=http://SmartOceanBenchmark:4317
+            - OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=otel-collector:4317
             - OTEL_EXPORTER_OTLP_METRICS_PROTOCOL=grpc
             - OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED=true
         volumes:
@@ -96,12 +98,13 @@ services:
            - INGESTION_PASSWORD=${PASSWORD1}
            - CORE_PASSWORD=${PASSWORD2}
            - CORE_USERNAME=transformer3
+           - ${CERT}=${CERT}
             # Open Telemetry configuration
            - OTEL_SERVICE_NAME=transformer3
            - OTEL_METRICS_EXPORTER=otlp
            - OTEL_TRACES_EXPORTER=none
            - OTEL_LOGS_EXPORTER=none
-           - OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=http://SmartOceanBenchmark:4317
+           - OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=otel-collector:4317
            - OTEL_EXPORTER_OTLP_METRICS_PROTOCOL=grpc
            - OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED=true
         volumes:
@@ -121,12 +124,13 @@ services:
             - INGESTION_PASSWORD=${PASSWORD1}
             - CORE_USERNAME=transformer4
             - CORE_PASSWORD=${PASSWORD2}
+            - ${CERT}=${CERT}
             # Open Telemetry configuration
             - OTEL_SERVICE_NAME=transformer4
             - OTEL_METRICS_EXPORTER=otlp
             - OTEL_TRACES_EXPORTER=none
             - OTEL_LOGS_EXPORTER=none
-            - OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=http://SmartOceanBenchmark:4317
+            - OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=otel-collector:4317
             - OTEL_EXPORTER_OTLP_METRICS_PROTOCOL=grpc
             - OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED=true
         volumes:
@@ -136,3 +140,4 @@ services:
         depends_on:
             hivemq-core:
                 condition: service_healthy
+                
