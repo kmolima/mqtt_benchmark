@@ -1,4 +1,5 @@
 # Deployment architecture under test (AUT) 2: one transformer per sensor hub stream
+name: aut2
 services:
     otel-collector:
         ports:

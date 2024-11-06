@@ -1,3 +1,4 @@
+name: ingestion
 services:
     # MQTT Ingestion Broker for provider 1
     hivemq1:

@@ -1,4 +1,5 @@
 # Deployment architecture under test (AUT) 1: one transformer per provider stream
+name: aut1
 services:
     otel-collector:
         ports:
