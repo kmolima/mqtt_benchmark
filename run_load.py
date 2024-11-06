@@ -6,8 +6,8 @@ import subprocess
 def run_docker_compose(compose_file):
     try:
         with subprocess.Popen(
-            ["docker-compose", "-f", compose_file, "up", "-d",
-             "--exit-code-from", "finish", "--abort-on-container-exit"]
+            ["docker-compose", "-f", compose_file, "up",
+             "--exit-code-from", "finish"]
         ) as proc:
             proc.wait()
             print("Docker Compose started successfully.")
@@ -72,8 +72,6 @@ def main():
     finally:
         proc.kill()
         print(f'Finished execution {exec}')
-
-
 
 
 if __name__ == "__main__":
