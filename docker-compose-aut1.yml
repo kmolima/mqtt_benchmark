@@ -3,7 +3,7 @@ name: aut1
 services:
     otel-collector:
         ports:
-            - 4318:4317
+            - 4317:4317
             - 8887:8887
             - 8886:8886
         volumes:
@@ -13,6 +13,7 @@ services:
             - BROKER=core-hivemq-broker
         image: otel/opentelemetry-collector:latest
         container_name: otel-collector
+        network_mode: host
     # MQTT Core Broker
     hivemq-core:
         image: hivemq/hivemq-ce
@@ -53,7 +54,7 @@ services:
           - OTEL_METRICS_EXPORTER=otlp
           - OTEL_TRACES_EXPORTER=none
           - OTEL_LOGS_EXPORTER=none
-          - OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=otel-collector:4317
+          - OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=127.0.0.1:4317
           - OTEL_EXPORTER_OTLP_METRICS_PROTOCOL=grpc
           - OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED=true
         volumes:
@@ -80,7 +81,7 @@ services:
            - OTEL_METRICS_EXPORTER=otlp
            - OTEL_TRACES_EXPORTER=none
            - OTEL_LOGS_EXPORTER=none
-           - OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=otel-collector:4317
+           - OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=127.0.0.1:4317
            - OTEL_EXPORTER_OTLP_METRICS_PROTOCOL=grpc
            - OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED=true
         volumes:

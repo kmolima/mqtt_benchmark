@@ -3,7 +3,7 @@ receivers:
   otlp:
     protocols:
       grpc:
-        endpoint: otel-collector:4317 # python openTelemetry auto-instrumentation receiver
+        endpoint: 127.0.0.1:4317 # python openTelemetry auto-instrumentation receiver
   # Data sources: metrics -- for HiveMQ metrics
   prometheus:
     config:
@@ -11,7 +11,7 @@ receivers:
         - job_name: otel-collector
           scrape_interval: 15s
           static_configs:
-            - targets: [hivemq-core:9397]  # hivemq extension ${env:BROKER}
+            - targets: [127.0.0.1:9397]  # hivemq extension ${env:BROKER}
   hostmetrics:
     collection_interval: 5m # default = 1m
     initial_delay: 10s # default = 1s
@@ -35,7 +35,7 @@ exporters:
     path: ./telemetry.json
   # Data sources: metrics
   prometheus:
-    endpoint: otel-collector:8887
+    endpoint: 127.0.0.1:8887
     namespace:
 
 processors:
@@ -43,7 +43,7 @@ processors:
 
 extensions:
   health_check:
-    endpoint: otel-collector:1313
+    endpoint: 127.0.0.1:1313
   # zpages:
 
 service:
@@ -59,7 +59,7 @@ service:
 #      processors: [ batch ]
   telemetry:
     metrics:
-      address: otel-collector:8886
+      address: 127.0.0.1:8886
     logs:
       level: "info"
 
