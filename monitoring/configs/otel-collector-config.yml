@@ -53,7 +53,7 @@ service:
 #      processors: [ batch ]
   telemetry:
     metrics:
-      address: 127.0.0.1:8886
+      address: 0.0.0.0:8886
     logs:
       level: "info"
 

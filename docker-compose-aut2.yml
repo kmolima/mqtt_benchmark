@@ -13,6 +13,7 @@ services:
         image: otel/opentelemetry-collector:latest
         container_name: otel-collector
         network_mode: host
+        command: ["--config","/etc/otel-collector-config.yaml"]
     # MQTT Core Broker
     hivemq-core:
         image: hivemq/hivemq-ce
