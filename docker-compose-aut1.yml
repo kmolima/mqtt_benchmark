@@ -58,6 +58,7 @@ services:
         volumes:
           - ./transformer/logs/${LOG_PATH}:/app/transformer/logs
           - ./transformer/configs/config-provider1.yml:/app/transformer/config.yml
+          - ${CERT}:${CERT}
         command: [ "aadinode_transformer.py", "--configfile","/app/transformer/config.yml" ]
         depends_on:
             hivemq-core:
@@ -84,6 +85,7 @@ services:
         volumes:
           - ./transformer/logs/${LOG_PATH}:/app/transformer/logs
           - ./transformer/configs/config-provider2.yml:/app/transformer/config.yml
+          - ${CERT}:${CERT}
         command: [ "wsense_transformer.py", "--configfile","/app/transformer/config.yml" ]
         depends_on:
             hivemq-core:
