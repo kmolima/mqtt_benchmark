@@ -60,6 +60,7 @@ def main():
                 print(f'Running execution {_exec}. . .')
                 run_docker_compose(load_docker_compose)
                 time.sleep(60)  # time between load repetition run -- KEEP ALIVE
+            proc.kill()
 
     except Exception as e:
         stop_docker_compose(load_docker_compose)
@@ -70,7 +71,6 @@ def main():
         print(e.output)
 
     finally:
-        proc.kill()
         print(f'Finished execution {exec}')
 
 
