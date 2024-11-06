@@ -31,7 +31,7 @@ def stop_docker_compose(compose_file):
 def main():
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--numexecs", required=True, default=10, type=int, help="Number of executions for parameter")
+    parser.add_argument("--numexecs", default=10, type=int, help="Number of executions for parameter")
     parser.add_argument("--stats", required=True, help="stats file")
 
     args = parser.parse_args()
