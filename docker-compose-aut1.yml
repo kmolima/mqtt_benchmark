@@ -47,7 +47,6 @@ services:
           - INGESTION_PASSWORD=${PASSWORD1}
           - CORE_USERNAME=transformer1
           - CORE_PASSWORD=${PASSWORD2}
-          - CERT=${CERT}
             # Open Telemetry configuration
           - OTEL_SERVICE_NAME=transformer1
           - OTEL_METRICS_EXPORTER=otlp
@@ -74,7 +73,6 @@ services:
            - INGESTION_PASSWORD=${PASSWORD1}
            - CORE_USERNAME=transformer2
            - CORE_PASSWORD=${PASSWORD2}
-           - CERT=${CERT}
             # Open Telemetry configuration
            - OTEL_SERVICE_NAME=transformer2
            - OTEL_METRICS_EXPORTER=otlp
