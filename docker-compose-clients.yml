@@ -1,15 +1,23 @@
 services:
+    finish:
+        image: ubuntu
+        depends_on:
+            provider1:
+                condition: service_completed_successfully
+            provider2:
+                condition: service_completed_successfully
+        entrypoint: ["exit", "0"]
     subscriber:
         container_name: subscriber
         env_file:
             - .env
         environment:
-            - QOS=0
-            - TOPIC=site1/#
-            - PASSWORD2=${PASSWORD2}
+            - QOS=${QOS}
+            - BROKER_PASSWORD=${PASSWORD2}
+            - BROKER_USERNAME=subscriber1
         volumes:
             - ./subscriber/configs/subscriber.yml:/app/config.yml
-            - ${CERT}:${CERT}
+            - /etc/ssl/certs/broker.chain.pem:/etc/ssl/certs/broker.chain.pem
             - ./subscriber/logs/${LOG_PATH}:/app/logs
         entrypoint: ["python3"]
         image: mqtt_client
@@ -23,13 +31,12 @@ services:
             - .env
         environment:
             - QOS=${QOS}
-            - TOPIC=site1/
-            - PASSWORD1=${PASSWORD1}
+            - BROKER_PASSWORD=${PASSWORD1}
         volumes:
             - ./publisher/configs/data_provider1.yml:/app/config.yml
-            - ./subscriber/logs/${LOG_PATH}:/app/logs
-            - ${CERT}:${CERT}
-            - ./publisher/data/provider1:/app/data
+            - ./publisher/logs/${LOG_PATH}:/app/logs
+            - /etc/ssl/certs/broker.chain.pem:/etc/ssl/certs/broker.chain.pem
+            - ./publisher/data/provider1:/app/data/provider1
         image: mqtt_client
         command: ["--configfile", "/app/config.yml"]
         depends_on:
@@ -41,13 +48,12 @@ services:
             - .env
         environment:
             - QOS=${QOS}
-            - TOPIC=site1/
-            - PASSWORD1=${PASSWORD1}
+            - BROKER_PASSWORD=${PASSWORD1}
         volumes:
             - ./publisher/configs/data_provider2.yml:/app/config.yml
-            - ./subscriber/logs/${LOG_PATH}:/app/logs
-            - ${CERT}:${CERT}
-            - ./publisher/data/provider2:/app/data
+            - ./publisher/logs/${LOG_PATH}:/app/logs
+            - /etc/ssl/certs/broker.chain.pem:/etc/ssl/certs/broker.chain.pem
+            - ./publisher/data/provider2:/app/data/provider2
         image: mqtt_client
         command: ["--configfile", "/app/config.yml"]
         depends_on:
