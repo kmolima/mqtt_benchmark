@@ -6,7 +6,8 @@ services:
                 condition: service_completed_successfully
             provider2:
                 condition: service_completed_successfully
-        entrypoint: ["exit", "0"]
+        entrypoint: ["/bin/bash"]
+        command: ["-c", "exit", "0"]
     subscriber:
         container_name: subscriber
         env_file:
