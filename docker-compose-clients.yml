@@ -10,6 +10,7 @@ services:
         command: ["-c", "exit", "0"]
     subscriber:
         container_name: subscriber
+        network_mode: host
         env_file:
             - .env
         environment:
@@ -28,6 +29,7 @@ services:
             start_period: 30s
     provider1:
         container_name: provider1
+        network_mode: host
         env_file:
             - .env
         environment:
@@ -45,6 +47,7 @@ services:
                 condition: service_healthy
     provider2:
         container_name: provider2
+        network_mode: host
         env_file:
             - .env
         environment:
