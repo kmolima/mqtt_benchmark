@@ -7,7 +7,7 @@ services:
             - 8887:8887
             - 8886:8886
         volumes:
-            - ./monitoring/configs/otel-collector-config-core.yml:/etc/otel-collector-config.yaml
+            - ./monitoring/configs/otel-collector-config.yml:/etc/otel-collector-config.yaml
         environment:
             - OTEL_RESOURCE_ATTRIBUTES=service.name=core,service.namespace=aut
         image: otel/opentelemetry-collector:latest
