@@ -6,7 +6,7 @@ import subprocess
 def run_docker_compose(compose_file):
     try:
         with subprocess.Popen(
-            ["docker-compose", "-f", compose_file, "up",
+            ["docker", "compose", "-f", compose_file, "up",
              "--exit-code-from", "finish"]
         ) as proc:
             proc.wait()
@@ -16,18 +16,25 @@ def run_docker_compose(compose_file):
         print(e.output)
         stop_docker_compose(compose_file)
         proc.kill()
+    except Exception as e:
+        proc.kill()
+        print(f'Error executing experiment docker compose: {e}')
 
 
 def stop_docker_compose(compose_file):
     try:
         with subprocess.Popen(
-            ["docker-compose", "-f", compose_file, "down"]
+            ["docker", "compose", "-f", compose_file, "down"]
         ) as proc:
             proc.wait()
             print("Docker Compose stopped successfully.")
     except subprocess.CalledProcessError as e:
         print(f"Error occurred: {e.returncode}")
         print(e.output)
+
+    except Exception as e:
+        proc.kill()
+        print(f'Error executing experiment docker compose: {e}')
 
 
 def main():
