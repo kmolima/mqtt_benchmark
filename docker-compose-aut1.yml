@@ -70,7 +70,7 @@ services:
           resources:
             limits:
               memory: 2gb
-              cpus: '1'
+              cpus: '2'
     # Provider 2 Transformer
     transformer2:
         image: data_transformer:latest
@@ -102,4 +102,4 @@ services:
           resources:
             limits:
               memory: 2gb
-              cpus: '1'
+              cpus: '2'
