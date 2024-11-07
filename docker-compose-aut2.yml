@@ -64,6 +64,11 @@ services:
         depends_on:
             hivemq-core:
                 condition: service_healthy
+        deploy:
+          resources:
+            limits:
+              memory: 1gb
+              cpus: '0.50'
     transformer12:
         image: data_transformer:latest
         container_name: data_transformer12
@@ -90,6 +95,11 @@ services:
         depends_on:
             hivemq-core:
                 condition: service_healthy
+        deploy:
+          resources:
+            limits:
+              memory: 1gb
+              cpus: '0.50'
     # Provider 2 Transformers
     transformer21:
         image: data_transformer:latest
@@ -117,6 +127,11 @@ services:
         depends_on:
             hivemq-core:
                 condition: service_healthy
+        deploy:
+          resources:
+            limits:
+              memory: 1gb
+              cpus: '0.50'
     transformer22:
         image: data_transformer:latest
         container_name: data_transformer22
@@ -143,4 +158,8 @@ services:
         depends_on:
             hivemq-core:
                 condition: service_healthy
-
+        deploy:
+          resources:
+            limits:
+              memory: 1gb
+              cpus: '0.50'
