@@ -69,8 +69,8 @@ services:
         deploy:
           resources:
             limits:
-              memory: 2gb
-              cpus: '2'
+              memory: 512mb
+              cpus: '0.5'
     # Provider 2 Transformer
     transformer2:
         image: data_transformer:latest
@@ -101,5 +101,5 @@ services:
         deploy:
           resources:
             limits:
-              memory: 2gb
-              cpus: '2'
+              memory: 512mb
+              cpus: '0.5'
