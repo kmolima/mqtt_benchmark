@@ -1,30 +1,30 @@
 services:
-    finish:
-        image: ubuntu
-        depends_on:
-            provider1:
-                condition: service_completed_successfully
-        entrypoint: ["/bin/bash"]
-        command: ["-c", "exit", "0"]
-    subscriber:
-        container_name: subscriber
-        network_mode: host
-        env_file:
-            - .env
-        environment:
-            - QOS=${QOS}
-            - BROKER_PASSWORD=${PASSWORD2}
-            - BROKER_USERNAME=subscriber1
-        volumes:
-            - ./subscriber/configs/subscriber.yml:/app/config.yml
-            - /etc/ssl/certs/broker.chain.pem:/etc/ssl/certs/broker.chain.pem
-            - ./subscriber/logs/${LOG_PATH}:/app/logs
-        entrypoint: ["python3"]
-        image: mqtt_client
-        command: ["subscriber.py", "--configfile", "/app/config.yml", "--logfile", "logs/subscriber.log"]
-        healthcheck:
-            test: "sleep 1"
-            start_period: 30s
+#    finish:
+#        image: ubuntu
+#        depends_on:
+#            provider1:
+#                condition: service_completed_successfully
+#        entrypoint: ["/bin/bash"]
+#        command: ["-c", "exit", "0"]
+#    subscriber:
+#        container_name: subscriber
+#        network_mode: host
+#        env_file:
+#            - .env
+#        environment:
+#            - QOS=${QOS}
+#            - BROKER_PASSWORD=${PASSWORD2}
+#            - BROKER_USERNAME=subscriber1
+#        volumes:
+#            - ./subscriber/configs/subscriber.yml:/app/config.yml
+#            - /etc/ssl/certs/broker.chain.pem:/etc/ssl/certs/broker.chain.pem
+#            - ./subscriber/logs/${LOG_PATH}:/app/logs
+#        entrypoint: ["python3"]
+#        image: mqtt_client
+#        command: ["subscriber.py", "--configfile", "/app/config.yml", "--logfile", "logs/subscriber.log"]
+#        healthcheck:
+#            test: "sleep 1"
+#            start_period: 30s
     provider1:
         container_name: provider1
         network_mode: host
@@ -40,9 +40,9 @@ services:
             - ./publisher/data/provider1:/app/data/provider1
         image: mqtt_client
         command: ["--configfile", "/app/config.yml"]
-        depends_on:
-            subscriber:
-                condition: service_healthy
+#        depends_on:
+#            subscriber:
+#                condition: service_healthy
     provider2:
         container_name: provider2
         network_mode: host
@@ -58,6 +58,6 @@ services:
             - ./publisher/data/provider2:/app/data/provider2
         image: mqtt_client
         command: ["--configfile", "/app/config.yml"]
-        depends_on:
-            subscriber:
-                condition: service_healthy
+#        depends_on:
+#            subscriber:
+#                condition: service_healthy

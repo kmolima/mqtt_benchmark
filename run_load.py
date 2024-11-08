@@ -1,13 +1,14 @@
 import argparse
 import time
 import subprocess
+import docker
 
 
 def run_docker_compose(compose_file):
     try:
         with subprocess.Popen(
             ["docker", "compose", "-f", compose_file, "up",
-             "--exit-code-from", "finish"]
+             "--force-recreate"]
         ) as proc:
             proc.wait()
             print("Docker Compose started successfully.")
