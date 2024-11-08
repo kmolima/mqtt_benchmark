@@ -1,8 +1,6 @@
 import argparse
 import time
 import subprocess
-import docker
-
 
 def run_docker_compose(compose_file):
     try:
