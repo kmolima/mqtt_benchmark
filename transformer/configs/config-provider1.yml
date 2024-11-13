@@ -4,7 +4,7 @@ INGESTION_TLS: True
 INGESTION_CA_CERT: ${CERT}
 CORE_BROKER: SmartOceanBenchmark
 CORE_BROKER_PORT: 1885
-INGESTION_TOPIC: site1/provider1/#
+INGESTION_TOPIC: site1/provider1/gateway1/hub1,site1/provider1/gateway2/hub1
 CORE_TOPIC: site1/provider1
 QOS: ${QOS}
 
