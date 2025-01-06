@@ -4,15 +4,20 @@ This is the replication package associated to the paper titled: "Evaluation of M
 In this study we benchmark latency and relibility of two different Architectural Under Test deployment option for MQTT bridge components implemented on client side.
 
 This repository contains both configuration files and logs recorded during the execution of the benchmark in 2 (virtual) host machines provissioned in a public and private cloud. The associated files are in the config and logs sub directories of the different software components part of the benchmark setup:
-- IoT Gateways (MQTT Publish Clients): mqtt_clients docker container image used in docker compose file ```docker-compose-clients.yml```
-- Subscriber (MQTT Subscribe Client): mqtt_clients docker container image using the entrypoint ```python3``` and  ```command: ["subscriber.py", "--configfile", "/app/config.yml", "--logfile", "logs/subscriber.log"]```
-- Bridge Processing Component (MQTT Bridge between a source and destination broker): ```data_transformer``` docker container image used in ```docker-compose-aut1.yml``` and ```docker-compose-aut2.yml```.
+- IoT Gateways (Gateway: MQTT Client): mqtt_clients docker container image used in docker compose file ```docker-compose-clients.yml```
+- Subscriber (Subscriber: MQTT Client): mqtt_clients docker container image using the entrypoint ```python3``` and  ```command: ["subscriber.py", "--configfile", "/app/config.yml", "--logfile", "logs/subscriber.log"]```
+- Transformer Bridge Processing Component (MQTT Bridge between a source and destination broker): ```data_transformer``` docker container image used in ```docker-compose-aut1.yml``` and ```docker-compose-aut2.yml```.
 - HiveMQ-CE (Community Edition of HiveMQ MQTT Broker): hivemq-ce [container image](https://hub.docker.com/r/hivemq/hivemq-ce), version 2024.7.
-- Monitoring components (Prometheus + Grafana): docker compose file ```docker-compose-monitoring.yml```.
+- Monitoring Subsystem (Prometheus + Grafana): docker compose file ```docker-compose-monitoring.yml```.
 
-The docker compose files contains the orchestration of the benchmark software components described above, having the needed deployment configurations setup there.
+The benchmark components described above are depicted in the figure below:
 
-## Package Structure Outline
+![Benchmark System Under Test Overview](SUT_overview.png)
+
+
+The referred docker compose files contains the orchestration of the benchmark software components described above, having the needed deployment configurations setup there.
+
+## Replication Package Structure Outline
 This replication package contains the following content:
 <pre><font color="#3465A4"><b>.</b></font>
 ├── <font color="#3465A4"><b>data_analysis</b> - Jupyter notebook and python scripts to reproduce result in Table IV and Figures 4-8.</font>
@@ -22,7 +27,6 @@ This replication package contains the following content:
 │   │       └── <font color="#3465A4"><b>datasources</b></font>
 │   ├── <font color="#3465A4"><b>hivemq-file-rbac-extension</b></font>
 │   │   ├── <font color="#3465A4"><b>conf</b></font>
-│   │   └── <font color="#3465A4"><b>credentials-archive</b></font>
 │   ├── <font color="#3465A4"><b>hivemq-prometheus-extension</b></font>
 │   └── <span style="background-color:#4E9A06"><font color="#3465A4">prometheus_data</font></span>
 ├── <font color="#3465A4"><b>publisher</b></font>
@@ -72,7 +76,6 @@ This replication package contains the following content:
         │   ├── <font color="#3465A4"><b>qos1</b></font>
         │   │   └── <span style="background-color:#4E9A06"><font color="#3465A4">prometheus_data</font></span>
         │   └── <span style="background-color:#4E9A06"><font color="#3465A4">qos2</font></span>
-        │       ├── <font color="#3465A4"><b>figures</b></font>
         │       └── <span style="background-color:#4E9A06"><font color="#3465A4">prometheus_data</font></span>
         ├── <font color="#3465A4"><b>aut2</b></font>
         │   ├── <font color="#3465A4"><b>qos0</b></font>
@@ -89,7 +92,7 @@ This replication package contains the following content:
             └── <font color="#3465A4"><b>qos2</b></font>
                 └── <span style="background-color:#4E9A06"><font color="#3465A4">prometheus_data</font></span>
 
-73 directories
+71 directories
 </pre>
 
 ## Benchmark setup
@@ -99,14 +102,28 @@ The subscriber is run manually running the associated docker image.
 
 # Requirements and Dependencies
 
+## Install Dependencies For Jupyter Notebook
+
+```shell
+cd data_analysis
+pip install -r requirements.txt
+```
+
 ## Experiments Logs Analysis
-- Any Jupyter Notebook editor (e.g. Jupiter Lab) -- for reproducing aggreated results
+- Any Jupyter Notebook editor (e.g. Jupiter Lab) -- for reproducing the aggregated results
     - Instructions to install Jupyter can be found [here](https://jupyter.org/install)
-- Python 3
+- Python 3.9
 
 ## Running the experiment
 - Docker container runtime engine (AUT docker containers needs to be recreated based on transformation of benchmark sample data into a uniform data model)
-- Python 3
+- Python 3.9
+
+### Install Dependencies Running the Benchmark
+
+```shell
+pip install -r requirements.txt
+```
+
 
 ## Results
 The results can be found in the resutls folder. Replication of the results can be obtained by running the data_analysis Jupiter Notebook in the data analysis folder. **Note that the full/absolute path to the logs in this replication package needs to be set there manually.**
@@ -125,6 +142,7 @@ docker run -p 9090:9090  -v PATH-TO-REPLICATION-PACKAGE/transformer/logs/aut3/qo
 
 ### Recreation of AUT Bridge Component
 To recreate the data transformation component, a subcriber and publisher client must be implemented in this component for bridging heterogeneous data ingested by the different sensor data providers to the following unifying data model:
+
 ![Common Data Model](https://smartoceanplatform.github.io/sodataformat.png)
 
 This component must be configured using the configuration parameters under the transformation/configs folder for each benchmark setup used.
@@ -135,7 +153,7 @@ This component must be configured using the configuration parameters under the t
    - Fetch and configure the plugins by running the script under ```script/setup-hiveMQ.sh```. 
    - The script in ```script/generate_rbac_file.py``` can be used to generate the needed credentials that are saved into the env variables after the execution of the script. 
 3. Define QoS benchmark parameter for clients and brokers (can be done using env variables or directly in the docker compose QOS variable)
-2. Run monitoring sub-system (```docker-compose-monitoring.yml``` docker compose file)
+2. Run monitoring subsystem (```docker-compose-monitoring.yml``` docker compose file)
 3. Run ingestion broker for each sensor data provider (```docker-compose-ingestion.yml``` source brokers docker compose file)
 2. Run AUT option (docker compose files ```docker-compose-aut1.yml``` and ```docker-compose-aut2.yml```) including the generated credentials file in scripts/
 2. Run the subscriber
