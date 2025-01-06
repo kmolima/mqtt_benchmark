@@ -126,7 +126,7 @@ pip install -r requirements.txt
 
 
 ## Results
-The results can be found in the resutls folder. Replication of the results can be obtained by running the data_analysis Jupiter Notebook in the data analysis folder. **Note that the full/absolute path to the logs in this replication package needs to be set there manually.**
+The results can be found in the resutls folder. Replication of the results can be obtained by running the data_analysis Jupiter Notebook in the data analysis folder.
 The Jupyter Notebook incrementally builds up the results depicted in Table IV and Figures 4-9 of the paper, starting by parsing the logs in this repository and building the necessary numpy array data structures. Firstly the global results are generated, followed by the in depth analysis of the results filtering the dataset by MQTT payload sizes (small - provider 2, gateway 1, medium and large - provider 1, gateways 2 and 1 respectively).
 
 The generated plots are also saved into the results folder and an spreadsheet converted to PDF named ```MQTT_Benchmark_results_overview_per_gateway.pdf```  is also provided with the extraction of values used in the results section.
