@@ -28,10 +28,9 @@ This replication package contains the following content:
 │   ├── <font color="#3465A4"><b>hivemq-file-rbac-extension</b></font>
 │   │   ├── <font color="#3465A4"><b>conf</b></font>
 │   ├── <font color="#3465A4"><b>hivemq-prometheus-extension</b></font>
-│   └── <span style="background-color:#4E9A06"><font color="#3465A4">prometheus_data</font></span>
 ├── <font color="#3465A4"><b>publisher</b> - Gateway component benchmark configuration and execution logs data.</font>
 │   ├── <font color="#3465A4"><b>configs</b></font>
-│   ├── <font color="#3465A4"><b>data</b></font>
+│   ├── <font color="#3465A4"><b>data</b> - Sensor Hubs payloads.</font>
 │   │   ├── <font color="#3465A4"><b>provider1</b></font>
 │   │   │   ├── <font color="#3465A4"><b>gateway1</b></font>
 │   │   │   └── <font color="#3465A4"><b>gateway2</b></font>
@@ -92,7 +91,7 @@ This replication package contains the following content:
             └── <font color="#3465A4"><b>qos2</b></font>
                 └── <span style="background-color:#4E9A06"><font color="#3465A4">prometheus_data</font></span>
 
-71 directories
+70 directories
 </pre>
 
 ## Benchmark setup
