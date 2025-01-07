@@ -21,7 +21,7 @@ The referred docker compose files contains the orchestration of the benchmark so
 This replication package contains the following content:
 <pre><font color="#3465A4"><b>.</b></font>
 ├── <font color="#3465A4"><b>data_analysis</b> - Jupyter notebook and python scripts to reproduce result in Table IV and Figures 4-8.</font>
-├── <font color="#3465A4"><b>monitoring</b></font>
+├── <font color="#3465A4"><b>monitoring</b> - Moniotring subsystem components benchmark configuration data.</font>
 │   ├── <font color="#3465A4"><b>configs</b></font>
 │   │   └── <font color="#3465A4"><b>provisioning</b></font>
 │   │       └── <font color="#3465A4"><b>datasources</b></font>
@@ -49,7 +49,7 @@ This replication package contains the following content:
 │           ├── <font color="#3465A4"><b>qos0</b></font>
 │           ├── <font color="#3465A4"><b>qos1</b></font>
 │           └── <font color="#3465A4"><b>qos2</b></font>
-├── <font color="#3465A4"><b>results</b> - compilation of generated PDF reports with plots.</font>
+├── <font color="#3465A4"><b>results</b> - Compilation of generated PDF reports with plots.</font>
 │   └── <font color="#3465A4"><b>Prometheus</b></font>
 ├── <font color="#3465A4"><b>subscriber</b> - Subscriber component benchmark configuration and execution logs data.</font>
 │   ├── <font color="#3465A4"><b>configs</b></font>
