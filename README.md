@@ -29,7 +29,7 @@ This replication package contains the following content:
 │   │   ├── <font color="#3465A4"><b>conf</b></font>
 │   ├── <font color="#3465A4"><b>hivemq-prometheus-extension</b></font>
 │   └── <span style="background-color:#4E9A06"><font color="#3465A4">prometheus_data</font></span>
-├── <font color="#3465A4"><b>publisher</b></font>
+├── <font color="#3465A4"><b>publisher</b> - Gateway component benchmark configuration and execution logs data.</font>
 │   ├── <font color="#3465A4"><b>configs</b></font>
 │   ├── <font color="#3465A4"><b>data</b></font>
 │   │   ├── <font color="#3465A4"><b>provider1</b></font>
@@ -50,9 +50,9 @@ This replication package contains the following content:
 │           ├── <font color="#3465A4"><b>qos0</b></font>
 │           ├── <font color="#3465A4"><b>qos1</b></font>
 │           └── <font color="#3465A4"><b>qos2</b></font>
-├── <font color="#3465A4"><b>results</b></font>
+├── <font color="#3465A4"><b>results</b> - compilation of generated PDF reports with plots.</font>
 │   └── <font color="#3465A4"><b>Prometheus</b></font>
-├── <font color="#3465A4"><b>subscriber</b></font>
+├── <font color="#3465A4"><b>subscriber</b> - Subscriber component benchmark configuration and execution logs data.</font>
 │   ├── <font color="#3465A4"><b>configs</b></font>
 │   └── <span style="background-color:#4E9A06"><font color="#3465A4">logs</font></span>
 │       ├── <font color="#3465A4"><b>aut1</b></font>
@@ -67,7 +67,7 @@ This replication package contains the following content:
 │           ├── <font color="#3465A4"><b>qos0</b></font>
 │           ├── <font color="#3465A4"><b>qos1</b></font>
 │           └── <font color="#3465A4"><b>qos2</b></font>
-└── <font color="#3465A4"><b>transformer</b></font>
+└── <font color="#3465A4"><b>transformer</b> - Bridge component benchmark configuration and execution logs data.</font>
     ├── <font color="#3465A4"><b>configs</b></font>
     └── <span style="background-color:#4E9A06"><font color="#3465A4">logs</font></span>
         ├── <span style="background-color:#4E9A06"><font color="#3465A4">aut1</font></span>
