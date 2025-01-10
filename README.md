@@ -138,6 +138,12 @@ First, decompress the recorded monitoring data by running:
 tar -xzvf monitoring_aut1_qos0.tar.gz monitoring/prometheus_data
 ```
 
+Then, change the permissions of the folder and its contents:
+
+```
+chmod -R 777 monitoring/prometheus_data/
+```
+
 Data stored in prometheus from the experiments can be visualized in the GUI at localhost:9090 after mounting the different experiment records folder as a read and write volume when running Prometheus docker container. As an example for AUT1, 29 bytes topic overhead.
 
 ```
