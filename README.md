@@ -131,10 +131,17 @@ The Jupyter Notebook incrementally builds up the results depicted in Table IV an
 The generated plots are also saved into the results folder and an spreadsheet converted to PDF named ```MQTT_Benchmark_results_overview_per_gateway.pdf```  is also provided with the extraction of values used in the results section.
 
 ## Replication of Prometheus data
-Data stored in prometheus from the experiments can be visualized in the GUI at localhost:9090 after mounting the different experiment records folder as a read and write volume when running Prometheus docker container. As an example for AUT1, 29 bytes topic overhead (AUT 3).
+The monitoring logs recorded in Prometheus are available in the transformer/logs folder in compressed file which name starts with "monitoring" and has a suffix with the associated AUT and QoS level configured. 
+First, decompress the recorded monitoring data by running:
 
 ```
-docker run -p 9090:9090  -v PATH-TO-REPLICATION-PACKAGE/transformer/logs/aut3/qos1/prometheus_data:/prometheus prom/prometheus
+tar -xzvf monitoring_aut1_qos0.tar.gz monitoring/prometheus_data
+```
+
+Data stored in prometheus from the experiments can be visualized in the GUI at localhost:9090 after mounting the different experiment records folder as a read and write volume when running Prometheus docker container. As an example for AUT1, 29 bytes topic overhead.
+
+```
+docker run -p 9090:9090  -v PATH-TO-REPLICATION-PACKAGE/transformer/logs/aut1_29b/qos1/monitoring/prometheus_data:/prometheus prom/prometheus
 ```
 
 ## Replication Instructions
