@@ -60,14 +60,62 @@ global stats_log_pattern
 stats_log_pattern = re.compile(
     r"(?P<container_id>[0-9a-fA-F]{64})\s+"                                    # CONTAINER ID: 64-character hex string
     r"(?P<name>[^\s]+)\s+"                                                     # NAME: non-whitespace characters
-    r"(?P<cpu>[\d.]+%)\s+"                                                     # CPU %: floating-point number followed by "%"
-    r"(?P<mem_usage>[\d.]+[a-zA-Z]+)\s*/\s*(?P<mem_limit>[\d.]+[a-zA-Z]+)\s+"  # MEM USAGE / LIMIT
-    r"(?P<mem_percent>[\d.]+%)\s+"                                             # MEM %: floating-point number followed by "%"
-    r"(?P<net_io_received>[^/\s]+)\s*/\s*(?P<net_io_transmitted>[^\s]+)\s+"    # NET I/O: any characters until a whitespace
-    r"(?P<block_io_read>[^/\s]+)\s*/\s*(?P<block_io_written>[^\s]+)\s+"        # BLOCK I/O: any characters until a whitespace
+    r"(?P<cpu>[\d.]+)%\s+"                                                     # CPU %: floating-point number followed by "%"
+    r"(?P<mem_usage>[\d.eE+-]+[a-zA-Z]+)\s*/\s*(?P<mem_limit>[\d.eE+-]+[a-zA-Z]+)\s+"  # MEM USAGE / LIMIT with units and scientific notation  # MEM USAGE / LIMIT
+    r"(?P<mem_percent>[\d.]+)%\s+"                                             # MEM %: floating-point number followed by "%"
+    r"(?P<net_io_received_value>[\d.eE+-]+)\s*(?P<net_io_received_unit>[a-zA-Z]*)\s*/\s*"           # NET I/O received value and unit
+    r"(?P<net_io_transmitted_value>[\d.eE+-]+)\s*(?P<net_io_transmitted_unit>[a-zA-Z]*)\s+"         # NET I/O transmitted value and unit
+    r"(?P<block_io_read_value>[\d.eE+-]+)\s*(?P<block_io_read_unit>[a-zA-Z]*)\s*/\s*"               # BLOCK I/O read value and unit
+    r"(?P<block_io_written_value>[\d.eE+-]+)\s*(?P<block_io_written_unit>[a-zA-Z]*)\s+"             # BLOCK I/O written value and unit
     r"(?P<pids>\d+)"                                                           # PIDS: integer
 )
 
+def get_resources_np_array(logs, aut, qos):
+    entries_list = list()
+
+    for i,log_group in enumerate(logs):
+        for log in log_group:
+            # Cleanup malformed data
+            if log['name'].endswith('ingestion-hivemq-broker2'):
+                log['name']='ingestion-hivemq-broker2'
+            row = [
+                aut,
+                qos,
+                log['name'],
+                log['cpu'],
+                log['mem_percent'],
+                log['pids'],
+                log['net_io_received_value'],
+                log['net_io_received_unit'],
+                log['net_io_transmitted_value'],
+                log['net_io_transmitted_unit'],
+                log['block_io_read_value'],
+                log['block_io_read_unit'],
+                log['block_io_written_value'],
+                log['block_io_written_unit'],
+                i
+            ]
+            entries_list.append(tuple(row))
+
+    # Define a custom dtype for the structured array
+    dtype = [('aut', 'U64'), ('qos', 'U64'),
+             ('name', 'U64'), ('cpu', 'f8'), ('mem_percent', 'f8'),('pids', 'i4'),
+             ('net_io_received', 'f8'), ('net_io_received_unit', 'U64'),
+             ('net_io_transmitted', 'f8'), ('net_io_transmitted_unit', 'U64'),
+             ('block_io_read', 'f8'), ('block_io_read_unit', 'U64'),
+             ('block_io_written', 'f8'), ('block_io_written_unit', 'U64'), 
+             ('entry_id','i4')]
+
+    # Convert to NumPy structured array
+    entries_np_array = np.array(entries_list, dtype=dtype)
+    return entries_np_array
+
+
+def get_stat_log_file(log_dir):
+    for file in os.listdir(log_dir):
+        if file.startswith('stats'):
+            return file
+    return None
 
 # Load log entries from aut / qos folder
 def get_sub_logs(log_path:str) -> list:
@@ -307,8 +355,8 @@ def get_stats_logs(file_path: str):
                         log_group.append(parsed_logs)
                         parsed_logs = list()
                     
-    print(f"Loaded {len(log_group)} groups of log entries and discarded {len(invalid_log_lines)} invalid entries.")
-    return parsed_logs
+    print(f"Loaded {len(log_group)} groups of log entries and discarded {invalid_log_lines} invalid entries from: {file_path}.")
+    return log_group
 
 
 def get_execs_bounds(d):
