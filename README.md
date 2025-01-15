@@ -20,7 +20,7 @@ In alternative you can visualize them in:
 - [prometheus_data.ipynb in NBViewer](https://nbviewer.org/github/kmolima/mqtt_benchmark/blob/main/data_analysis/prometheus_data.ipynb)
 
 
-## Benchmark Setup System Under Test
+## Benchmark Setup and System Under Test
 
 This repository contains both configuration files and logs recorded during the execution of the benchmark in 2 (virtual) host machines provissioned in a public and private cloud. The associated files are in the config and logs sub directories of the different software components part of the benchmark setup:
 - IoT Gateways (Gateway: MQTT Client): mqtt_clients docker container image used in docker compose file ```docker-compose-clients.yml```
