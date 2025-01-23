@@ -1,5 +1,8 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14724540.svg)](https://doi.org/10.5281/zenodo.14724540)
+
 # Overview
-This is the replication package associated to the paper titled: "Evaluation of MQTT Bridge Architectures in a Cross-Organizational Context" submitted to the [22nd IEEE International Conference on Software Architecture (ICSA 2025)](https://conf.researchr.org/home/icsa-2025]).
+This is the replication package associated to the paper titled: "Evaluation of MQTT Bridge Architectures in a Cross-Organizational Context" submitted to the [22nd IEEE International Conference on Software Architecture (ICSA 2025)](https://conf.researchr.org/home/icsa-2025]). 
+
 
 In this study we benchmark latency and relibility of two different Architectural Under Test deployment option for MQTT bridge components implemented on client side.
 
