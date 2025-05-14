@@ -70,6 +70,27 @@ stats_log_pattern = re.compile(
     r"(?P<pids>\d+)"                                                           # PIDS: integer
 )
 
+stats_log_pattern_no_space = re.compile(
+    r"(?P<container_id>[0-9a-fA-F]{64})\s*"                          # Container ID: 64-character hex string
+    r"(?P<cpu>[\d.]+)%\s*"                                           # CPU %: floating-point number followed by "%"
+    r"(?P<name>[a-zA-Z0-9\-]+)\s*"                                   # Name: alphanumeric characters and dashes
+    r"(?P<mem_usage>[\d.]+[KMGTPEZY]?[i]?[bB]?)\s*/\s*(?P<mem_limit>[\d.]+[KMGTPEZY]?[i]?[bB]?)\s*" # MEM USAGE / LIMIT: usage/limit with units
+    r"(?P<mem_percent>[\d.]+)%\s*"                                   # MEM %: floating-point number followed by "%"
+    r"(?P<net_io_received>[\d.]+[KMGTPEZY]?[i]?[bB]?)\s*/\s*(?P<net_io_transmitted>[\d.]+[KMGTPEZY]?[i]?[bB]?)\s*" # NET I/O: received/transmitted with units
+    r"(?P<block_io_read>[\d.]+[KMGTPEZY]?[i]?[bB]?)\s*/\s*(?P<block_io_written>[\d.]+[KMGTPEZY]?[i]?[bB]?)\s*"   # BLOCK I/O: read/written with units
+    r"(?P<pids>\d+)"                                                 # PIDs: integer
+)
+
+# Convert units
+global B2KB
+B2KB = 1000
+
+global MB2KB
+MB2KB = 0.001
+
+global GB2KB
+GB2KB = 1e-6
+
 def get_resources_np_array(logs, aut, qos):
     entries_list = list()
 
@@ -328,6 +349,7 @@ def get_stats_logs(file_path: str):
     # Parse each line
     parsed_logs = list()
     invalid_log_lines=0
+    total_entries=0
     # Split the log block into lines and parse each log entry
     if os.path.isfile(file_path):
         with open(file_path, 'r') as file:
@@ -339,9 +361,57 @@ def get_stats_logs(file_path: str):
                     continue
 
                 if not header_pattern.match(line):
-                    match = stats_log_pattern.match(line.strip())
-                    if match:  # beginning of block of samples
-                        log_data = match.groupdict()
+                    match = stats_log_pattern.match(line.strip().replace("CONTAINER ID","").replace("CPU","").replace("MEM USAGE / LIMIT",""))  # cleanup wrong print -> race condition on file write
+                    match_no_space = stats_log_pattern_no_space.match(line.strip().replace("CONTAINER ID","").replace("CPU","").replace("MEM USAGE / LIMIT",""))  # cleanup wrong print -> race condition on file write
+                    if match or match_no_space:  # beginning of block of samples
+                        if match:
+                            log_data = match.groupdict()
+                        else:
+                            match_no_space.groupdict()
+                        
+                        #  convert to KB
+                        if log_data['net_io_received_unit'].strip() == 'B':
+                            log_data['net_io_received_value'] = float(log_data['net_io_received_value']) * B2KB
+                            log_data['net_io_received_unit'] = 'kB'
+                        elif log_data['net_io_received_unit'].strip() == 'MB':
+                            log_data['net_io_received_value'] = float(log_data['net_io_received_value']) * MB2KB
+                            log_data['net_io_received_unit'] = 'kB'
+                        elif log_data['net_io_received_unit'].strip() == 'GB':
+                            log_data['net_io_received_value'] = float(log_data['net_io_received_value']) * GB2KB
+                            log_data['net_io_received_unit'] = 'kB'
+                        # net_io_transmitted
+                        if log_data['net_io_transmitted_unit'].strip() == 'B':
+                            log_data['net_io_transmitted_value'] = float(log_data['net_io_transmitted_value']) * B2KB
+                            log_data['net_io_transmitted_unit'] = 'kB'
+                        elif log_data['net_io_transmitted_unit'].strip() == 'MB':
+                            log_data['net_io_transmitted_value'] = float(log_data['net_io_transmitted_value']) * MB2KB
+                            log_data['net_io_transmitted_unit'] = 'kB'
+                        elif log_data['net_io_transmitted_unit'].strip() == 'GB':
+                            log_data['net_io_transmitted_value'] = float(log_data['net_io_transmitted_value']) * GB2KB
+                            log_data['net_io_transmitted_unit'] = 'kB'
+                        # block_io_read
+                        if log_data['block_io_read_unit'].strip() == 'B':
+                            log_data['block_io_read_value'] = float(log_data['block_io_read_value']) * B2KB
+                            log_data['block_io_read_unit'] = 'kB'
+                        elif log_data['block_io_read_unit'].strip() == 'MB':
+                            log_data['block_io_read_value'] = float(log_data['block_io_read_value']) * MB2KB
+                            log_data['block_io_read_unit'] = 'kB'
+                        elif log_data['block_io_read_unit'].strip() == 'GB':
+                            log_data['block_io_read_value'] = float(log_data['block_io_read_value']) * GB2KB
+                            log_data['block_io_read_unit'] = 'kB'
+                        # block_io_read
+                        if log_data['block_io_written_unit'].strip() == 'B':
+                            log_data['block_io_written_value'] = float(log_data['block_io_written_value']) * B2KB
+                            log_data['block_io_written_unit'] = 'kB'
+                        elif log_data['block_io_written_unit'].strip() == 'MB':
+                            log_data['block_io_written_value'] = float(log_data['block_io_written_value']) * MB2KB
+                            log_data['block_io_written_unit'] = 'kB'
+                        elif log_data['block_io_written_unit'].strip() == 'GB':
+                            log_data['block_io_written_value'] = float(log_data['block_io_written_value']) * GB2KB
+                            log_data['block_io_written_unit'] = 'kB'
+                        #else:
+                        #    print(log_data)
+
                         parsed_logs.append(log_data)
                     else:
                         # print(f"Log entry does not match the pattern: {line}")
@@ -350,12 +420,13 @@ def get_stats_logs(file_path: str):
                 # Header match -> beginning of new block of samples
                 if header_pattern.match(line):
                     log_block += 1
+                    total_entries=total_entries+len(parsed_logs)
                     # Change block and reset log entry structure
                     if len(parsed_logs) > 0:
                         log_group.append(parsed_logs)
                         parsed_logs = list()
                     
-    print(f"Loaded {len(log_group)} groups of log entries and discarded {invalid_log_lines} invalid entries from: {file_path}.")
+    print(f"Loaded {total_entries} entries from {len(log_group)} groups of log entries and discarded {invalid_log_lines} invalid entries from: {file_path}.")
     return log_group
 
 
