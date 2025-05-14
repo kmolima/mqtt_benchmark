@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Device ID="5650-2186" SessionID="5650-2186-2024-10-25T12:31:01Z" Descr="Seaguard II Platform" SerialNo="2186" ProdNo="5650" ProdName="SeaGuard II" DeviceType="Instrument" ProtocolVer="6" xmlns="http://www.aadi.no/RTOutSchema">
+	<Time>2024-12-12T11:30:10.012Z</Time>
+	<TimeReceived>2024-12-12T11:31:06.8417179Z</TimeReceived>
+	<SystemInformation>
+		<SystemInfo ID="10" Descr="Owner" Type="VT_BSTR" />
+		<SystemInfo ID="13" Descr="Location " Type="VT_BSTR">Austevoll Sor</SystemInfo>
+		<SystemInfo ID="12" Descr="Reference" Type="VT_BSTR">SFI Smart Ocean</SystemInfo>
+		<SystemInfo ID="21" Descr="GeoPosition" Type="VT_BSTR">60.085983,5.279067</SystemInfo>
+		<SystemInfo ID="30" Descr="VerticalPosition" Type="VT_BSTR">-11.85555</SystemInfo>
+	</SystemInformation>
+    <Data SessionID="5650-2186-0-2024-10-25T12-31-28.688Z" GroupID="0" GroupDescr="Main">
+		<Time>2024-12-12T11:30:00Z</Time>
+		<RecordNumber>2302</RecordNumber>
+        <SensorData ID="4835-754" Descr="Oxygen Optode #754" NodeTypeID="2040" SerialNo="754" ProdNo="4835" ProdName="Oxygen Optode" ProtocolVer="6">
+			<Parameters>
+				<Point ID="1" Descr="O2Concentration" Type="VT_R4" Format="%0.3f" Unit="uM" RangeMin="0" RangeMax="500">
+					<Value>326.95663</Value>
+				</Point>
+				<Point ID="2" Descr="AirSaturation" Type="VT_R4" Format="%0.3f" Unit="%" RangeMin="0" RangeMax="150">
+					<Value>92.793823</Value>
+				</Point>
+				<Point ID="3" Descr="Temperature" Type="VT_R4" Format="%0.3f" Unit="Deg.C" RangeMin="-5" RangeMax="40">
+					<Value>10.028883</Value>
+				</Point>
+				<Point ID="9" Descr="CalPhase" Type="VT_R4" Format="%0.3f" Unit="Deg" RangeMin="0" RangeMax="90">
+					<Value>32.770321</Value>
+				</Point>
+				<Point ID="8" Descr="TCPhase" Type="VT_R4" Format="%0.3f" Unit="Deg" RangeMin="0" RangeMax="90">
+					<Value>33.816322</Value>
+				</Point>
+				<Point ID="6" Descr="C1RPh" Type="VT_R4" Format="%0.3f" Unit="Deg" RangeMin="0" RangeMax="90">
+					<Value>41.997482</Value>
+				</Point>
+				<Point ID="7" Descr="C2RPh" Type="VT_R4" Format="%0.3f" Unit="Deg" RangeMin="0" RangeMax="90">
+					<Value>8.18116</Value>
+				</Point>
+				<Point ID="4" Descr="C1Amp" Type="VT_R4" Format="%0.1f" Unit="mV" RangeMin="0" RangeMax="3300">
+					<Value>773.80823</Value>
+				</Point>
+				<Point ID="5" Descr="C2Amp" Type="VT_R4" Format="%0.1f" Unit="mV" RangeMin="0" RangeMax="3300">
+					<Value>855.9812</Value>
+				</Point>
+				<Point ID="10" Descr="RawTemp" Type="VT_R4" Format="%0.1f" Unit="mV" RangeMin="-1500" RangeMax="1500">
+					<Value>552.34955</Value>
+				</Point>
+			</Parameters>
+		</SensorData>
+        <SensorData ID="4835-755" Descr="Oxygen Optode #755" NodeTypeID="2041" SerialNo="755" ProdNo="4835" ProdName="Oxygen Optode" ProtocolVer="6">
+			<Parameters>
+				<Point ID="1" Descr="O2Concentration" Type="VT_R4" Format="%0.3f" Unit="uM" RangeMin="0" RangeMax="500">
+					<Value>326.95663</Value>
+				</Point>
+				<Point ID="2" Descr="AirSaturation" Type="VT_R4" Format="%0.3f" Unit="%" RangeMin="0" RangeMax="150">
+					<Value>92.793823</Value>
+				</Point>
+				<Point ID="3" Descr="Temperature" Type="VT_R4" Format="%0.3f" Unit="Deg.C" RangeMin="-5" RangeMax="40">
+					<Value>10.028883</Value>
+				</Point>
+				<Point ID="9" Descr="CalPhase" Type="VT_R4" Format="%0.3f" Unit="Deg" RangeMin="0" RangeMax="90">
+					<Value>32.770321</Value>
+				</Point>
+				<Point ID="8" Descr="TCPhase" Type="VT_R4" Format="%0.3f" Unit="Deg" RangeMin="0" RangeMax="90">
+					<Value>33.816322</Value>
+				</Point>
+				<Point ID="6" Descr="C1RPh" Type="VT_R4" Format="%0.3f" Unit="Deg" RangeMin="0" RangeMax="90">
+					<Value>41.997482</Value>
+				</Point>
+				<Point ID="7" Descr="C2RPh" Type="VT_R4" Format="%0.3f" Unit="Deg" RangeMin="0" RangeMax="90">
+					<Value>8.18116</Value>
+				</Point>
+				<Point ID="4" Descr="C1Amp" Type="VT_R4" Format="%0.1f" Unit="mV" RangeMin="0" RangeMax="3300">
+					<Value>773.80823</Value>
+				</Point>
+				<Point ID="5" Descr="C2Amp" Type="VT_R4" Format="%0.1f" Unit="mV" RangeMin="0" RangeMax="3300">
+					<Value>855.9812</Value>
+				</Point>
+				<Point ID="10" Descr="RawTemp" Type="VT_R4" Format="%0.1f" Unit="mV" RangeMin="-1500" RangeMax="1500">
+					<Value>552.34955</Value>
+				</Point>
+			</Parameters>
+		</SensorData>
+		<SensorData ID="4060-1063" Descr="Temperature Sensor #1063" NodeTypeID="2110" SerialNo="1063" ProdNo="4060" ProdName="Temperature Sensor" ProtocolVer="6">
+			<Parameters>
+				<Point ID="1" Descr="Temperature" Type="VT_R4" Format="%0.3f" Unit="DegC" RangeMin="-5" RangeMax="35">
+					<Value>10.026043</Value>
+				</Point>
+				<Point ID="3" Descr="Rawdata Temperature" Type="VT_I4" Format="%d">
+					<Value>11254982</Value>
+				</Point>
+			</Parameters>
+		</SensorData>
+		<SensorData ID="5217-505" Descr="Tide Sensor #505" NodeTypeID="2020" SerialNo="505" ProdNo="5217" ProdName="Tide Sensor" ProtocolVer="6">
+			<Parameters>
+				<Point ID="0" Descr="Pressure" Type="VT_R4" Format="%0.3f" Unit="kPa" RangeMin="0" RangeMax="400">
+					<Value>713.95465</Value>
+				</Point>
+				<Point ID="1" Descr="Temperature" Type="VT_R4" Format="%0.3f" Unit="DegC" RangeMin="-5" RangeMax="35">
+					<Value>10.002724</Value>
+				</Point>
+				<Point ID="29" Descr="Tide Pressure" Type="VT_R4" Format="%0.3f" Unit="kPa" RangeMin="0" RangeMax="400">
+					<Value>713.96222</Value>
+				</Point>
+				<Point ID="30" Descr="Tide Level" Type="VT_R4" Format="%0.3f" Unit="m" RangeMin="-20" RangeMax="20">
+					<Value>-24.139935</Value>
+				</Point>
+			</Parameters>
+		</SensorData>
+        <SensorData ID="5217-506" Descr="Tide Sensor #506" NodeTypeID="2021" SerialNo="506" ProdNo="5217" ProdName="Tide Sensor" ProtocolVer="6">
+			<Parameters>
+				<Point ID="0" Descr="Pressure" Type="VT_R4" Format="%0.3f" Unit="kPa" RangeMin="0" RangeMax="400">
+					<Value>713.95465</Value>
+				</Point>
+				<Point ID="1" Descr="Temperature" Type="VT_R4" Format="%0.3f" Unit="DegC" RangeMin="-5" RangeMax="35">
+					<Value>10.002724</Value>
+				</Point>
+				<Point ID="29" Descr="Tide Pressure" Type="VT_R4" Format="%0.3f" Unit="kPa" RangeMin="0" RangeMax="400">
+					<Value>713.96222</Value>
+				</Point>
+				<Point ID="30" Descr="Tide Level" Type="VT_R4" Format="%0.3f" Unit="m" RangeMin="-20" RangeMax="20">
+					<Value>-24.139935</Value>
+				</Point>
+			</Parameters>
+		</SensorData>
+		<SensorData ID="5819-43" Descr="Conductivity Sensor #43" NodeTypeID="2060" SerialNo="43" ProdNo="5819" ProdName="Conductivity Sensor" ProtocolVer="6">
+			<Parameters>
+				<Point ID="1" Descr="Conductivity" Type="VT_R4" Format="%0.3f" Unit="mS/cm" RangeMin="0" RangeMax="75">
+					<Value>36.808201</Value>
+				</Point>
+				<Point ID="2" Descr="Temperature" Type="VT_R4" Format="%0.3f" Unit="Deg.C" RangeMin="-5" RangeMax="40">
+					<Value>10.00334</Value>
+				</Point>
+				<Point ID="6" Descr="Conductance" Type="VT_R4" Format="%0.3f" Unit="mS">
+					<Value>7.8610344</Value>
+				</Point>
+				<Point ID="7" Descr="RawCond0" Type="VT_I4" Unit="LSB">
+					<Value>17142</Value>
+				</Point>
+				<Point ID="9" Descr="ZAmp" Type="VT_R4" Format="%0.3f" Unit="mV">
+					<Value>-3284.3398</Value>
+				</Point>
+				<Point ID="10" Descr="ExRawTemp" Type="VT_R4" Format="%0.3f" Unit="mV">
+					<Value>475.27222</Value>
+				</Point>
+				<Point ID="13" Descr="InRawTemp" Type="VT_R4" Format="%0.3f" Unit="mV">
+					<Value>455.84146</Value>
+				</Point>
+				<Point ID="11" Descr="UsedRange" Type="VT_I2">
+					<Value>4</Value>
+				</Point>
+			</Parameters>
+		</SensorData>
+		<SensorData ID="AN100-0" Descr="Analog Sensors #0" NodeTypeID="240" SerialNo="0" ProdNo="AN100" ProdName="Analog Sensors" ProtocolVer="6">
+			<Parameters>
+				<Point ID="30" Descr="Turbidity#16340" Type="VT_R4" Unit="FTU" RangeMin="0" RangeMax="125">
+					<Value>74.079704</Value>
+				</Point>
+				<Point ID="31" Descr="Turbidity#16340 Raw data" Type="VT_R4" Unit="V" RangeMin="0.0" RangeMax="5.0">
+					<Value>2.9019687</Value>
+				</Point>
+			</Parameters>
+		</SensorData>
+		<SensorData ID="SBE37-1111" Descr="SeaBird SBE #1111" NodeTypeID="2999" SerialNo="1111" ProdNo="SBE37" ProdName="SeaBird SBE" ProtocolVer="6">
+			<Parameters>
+				<Point ID="0" Descr="Temperature" Type="VT_R4" Unit="Deg.C">
+					<Value>10.0266</Value>
+				</Point>
+				<Point ID="1" Descr="Conductivity" Type="VT_R4" Unit="S/m">
+					<Value>3.69016</Value>
+				</Point>
+				<Point ID="2" Descr="Pressure" Type="VT_R4" Unit="dBar">
+					<Value>63.422001</Value>
+				</Point>
+				<Point ID="3" Descr="Oxygen" Type="VT_R4" Unit="mg/l">
+					<Value>33.732601</Value>
+				</Point>
+				<Point ID="4" Descr="Sound Velocity" Type="VT_R4" Unit="m/s">
+					<Value>1489.427</Value>
+				</Point>
+			</Parameters>
+		</SensorData>
+        <SensorData ID="SBE37-1112" Descr="SeaBird SBE #1112" NodeTypeID="3000" SerialNo="1112" ProdNo="SBE37" ProdName="SeaBird SBE" ProtocolVer="6">
+			<Parameters>
+				<Point ID="0" Descr="Temperature" Type="VT_R4" Unit="Deg.C">
+					<Value>10.05266</Value>
+				</Point>
+				<Point ID="1" Descr="Conductivity" Type="VT_R4" Unit="S/m">
+					<Value>3.695016</Value>
+				</Point>
+				<Point ID="2" Descr="Pressure" Type="VT_R4" Unit="dBar">
+					<Value>63.4225001</Value>
+				</Point>
+				<Point ID="3" Descr="Oxygen" Type="VT_R4" Unit="mg/l">
+					<Value>33.7326501</Value>
+				</Point>
+				<Point ID="4" Descr="Sound Velocity" Type="VT_R4" Unit="m/s">
+					<Value>1489.4257</Value>
+				</Point>
+			</Parameters>
+		</SensorData>
+        <SystemData ID="SYSDATA-0" Descr="System Parameters">
+			<Parameters>
+				<Point ID="0" Descr="Input Voltage" Type="VT_R4" Format="%.1f" Unit="V" RangeMin="0" RangeMax="14">
+					<Value>12.446113</Value>
+				</Point>
+				<Point ID="5" Descr="Memory Used" Type="VT_I4" Unit="Bytes" RangeMin="0" RangeMax="32000000">
+					<Value>19075072</Value>
+				</Point>
+			</Parameters>
+		</SystemData>
+    </Data>
+    <Notifications />
+    </Device>
